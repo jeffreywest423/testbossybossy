@@ -171,7 +171,6 @@
     <header class="bg-black/80 backdrop-blur-md z-40 shrink-0 border-b border-white/5">
         <div class="h-14 px-5 flex items-center justify-between">
             <div class="flex items-center gap-3" onclick="router('menu')">
-                <!-- Logo Agrandi (h-10) -->
                 <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" class="h-10 w-auto drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">
                 <div>
                     <h1 class="text-xs font-black text-white uppercase tracking-wider brand-font">South Valley</h1>
@@ -327,13 +326,13 @@
     async function updateTicker() {
         const el = document.getElementById('live-ticker');
         
-        // Messages encodés en HTML Entities pour éviter les bugs d'affichage
+        // Messages avec Emojis encodés en JS Unicode pour éviter tout bug d'affichage
         // "ARRIVAGE PREMIUM EN COURS..."
-        const msg1 = '<span class="ticker-item"><span class="ticker-icon">&#128230;</span> ARRIVAGE PREMIUM EN COURS...</span>';
+        const msg1 = '<span class="ticker-item"><span class="ticker-icon">\uD83D\uDCE6</span> ARRIVAGE PREMIUM EN COURS...</span>';
         // "-10% SUR LES ENVOIS POSTAL !"
-        const msg2 = '<span class="ticker-item"><span class="ticker-icon">&#128235;</span> -10% SUR LES ENVOIS POSTAL !</span>';
+        const msg2 = '<span class="ticker-item"><span class="ticker-icon">\uD83D\uDCEB</span> -10% SUR LES ENVOIS POSTAL !</span>';
         // "1 AMI VALIDÉ = 1G OFFERT"
-        const msg3 = '<span class="ticker-item"><span class="ticker-icon">&#127873;</span> 1 AMI VALID&Eacute; = 1G OFFERT</span>';
+        const msg3 = '<span class="ticker-item"><span class="ticker-icon">\uD83C\uDF81</span> 1 AMI VALID\u00C9 = 1G OFFERT</span>';
 
         const comms = [msg1, msg2, msg3];
         
@@ -347,12 +346,12 @@
                 const change = data[coin].eur_24h_change;
                 const arrow = change >= 0 ? '▲' : '▼';
                 const color = change >= 0 ? 'ticker-up' : 'ticker-down';
-                return `<span class="ticker-item">${name}: <span class="ticker-val">${Math.floor(price)}&euro;</span> <span class="${color} text-[8px]">${arrow} ${Math.abs(change).toFixed(1)}%</span></span>`;
+                return `<span class="ticker-item">${name}: <span class="ticker-val">${Math.floor(price)}\u20AC</span> <span class="${color} text-[8px]">${arrow} ${Math.abs(change).toFixed(1)}%</span></span>`;
             };
 
             cryptoHtml = formatCoin('bitcoin', 'BTC') + formatCoin('ethereum', 'ETH') + formatCoin('tether', 'USDT');
         } catch (e) {
-            cryptoHtml = '<span class="ticker-item">BTC/ETH/USDT ACCEPT&Eacute;S</span>';
+            cryptoHtml = '<span class="ticker-item">BTC/ETH/USDT ACCEPT\u00C9S</span>';
         }
 
         const content = comms.join('') + cryptoHtml;
@@ -379,39 +378,40 @@
     }
 
     // --- DATA ---
+    // Utilisation de Unicode Escape Sequences pour le JS pour éviter tout problème d'encodage de fichier
     const CATALOG = [
         {
-            id: 'MC', name: _d('TU9OVMOJIENSSVNUTw=='), category: _d('U25vdyBWYWxsZXk='), icon: '&#10052;&#65039;',
-            desc: "Origine Bolivie &#127463;&#127476;. Puret&eacute; exceptionnelle (0.98%). Une exp&eacute;rience givr&eacute;e unique.", tag: "DIAMOND",
+            id: 'MC', name: _d('TU9OVMOJIENSSVNUTw=='), category: _d('U25vdyBWYWxsZXk='), icon: '\u2744\uFE0F',
+            desc: "Origine Bolivie \uD83C\uDDE7\uD83C\uDDF4. Puret\u00E9 exceptionnelle (0.98%). Une exp\u00E9rience givr\u00E9e unique.", tag: "DIAMOND",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906305/IMG_1629_ntkjra.mp4",
             tiers: [{w:'1G',p:60},{w:'2G',p:120},{w:'3G',p:160},{w:'5G',p:260},{w:'10G',p:400},{w:'50G',p:1500},{w:'100G',p:2800}]
         },
         {
-            id: 'PK', name: _d('UGluayBLdXNo'), category: _d('U3VubnkgVmFsbGV5'), icon: '&#9728;&#65039;',
-            desc: "Import Cali &#127482;&#127480;. Taux THC 34%. Terp&egrave;nes explosifs.", tag: "TOP SHELF",
+            id: 'PK', name: _d('UGluayBLdXNo'), category: _d('U3VubnkgVmFsbGV5'), icon: '\uD83E\uDEC2', // DNA
+            desc: "Import Cali \uD83C\uDDFA\uD83C\uDDF8. Taux THC 34%. Terp\u00E8nes explosifs.", tag: "TOP SHELF",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov",
             tiers: [{w:'5G',p:60},{w:'10G',p:120},{w:'25G',p:220},{w:'50G',p:360},{w:'100G',p:640},{w:'500G',p:2900}]
         },
         {
-            id: 'SM', name: _d('U2ltcHNvbnMgTW91c3Nl'), category: _d('U3VubnkgVmFsbGV5'), icon: '&#9728;&#65039;',
-            desc: "La r&eacute;f&eacute;rence Mousseux 2025. Texture parfaite.", tag: "REF 2025",
+            id: 'SM', name: _d('U2ltcHNvbnMgTW91c3Nl'), category: _d('U3VubnkgVmFsbGV5'), icon: '\uD83E\uDDFD', // Sponge
+            desc: "La r\u00E9f\u00E9rence Mousseux 2025. Texture parfaite.", tag: "REF 2025",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4",
             tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:170},{w:'100G',p:350}]
         },
         {
-            id: 'XM', name: _d('WGFsZSBNb3Vzc2U='), category: _d('U3VubnkgVmFsbGV5'), icon: '&#9728;&#65039;',
-            desc: "Top jaune mousseux. Rapport qualit&eacute;/prix imbattable.", tag: "LIMIT&Eacute;",
+            id: 'XM', name: _d('WGFsZSBNb3Vzc2U='), category: _d('U3VubnkgVmFsbGV5'), icon: '\uD83E\uDDFD', // Sponge
+            desc: "Top jaune mousseux. Rapport qualit\u00E9/prix imbattable.", tag: "LIMIT\u00C9",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906313/IMG_1819_i4ipsf.mp4",
             tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:160},{w:'100G',p:340}]
         }
     ];
 
     const REVIEWS = [
-        { name: "Client 01821", txt: "Du caviar la Mont&eacute; CRISTO, merci la team ! &#128591;" },
-        { name: "Client 01544", txt: "Service rapide de nuit, la Cali c'est du lourd &#129431;" },
-        { name: "Client 01634", txt: "Meet-up 92 carr&eacute;, servie au gramme pr&egrave;s. &#128077;" },
-        { name: "Client 02983", txt: "Valid&eacute; fort, je recommande pour les f&ecirc;tes. &#128079;" },
-        { name: "Client 02718", txt: "Livraison rapide, discret, produits top. &#128230;" }
+        { name: "Client 01821", txt: "Du caviar la Mont\u00E9 CRISTO, merci la team ! \uD83D\uDE4F" },
+        { name: "Client 01544", txt: "Service rapide de nuit, la Cali c'est du lourd \uD83E\uDDB7" },
+        { name: "Client 01634", txt: "Meet-up 92 carr\u00E9, servie au gramme pr\u00E8s. \uD83D\uDC4D" },
+        { name: "Client 02983", txt: "Valid\u00E9 fort, je recommande pour les f\u00EAtes. \uD83D\uDC4F" },
+        { name: "Client 02718", txt: "Livraison rapide, discret, produits top. \uD83D\uDCE6" }
     ];
 
     // --- ROUTER ---
@@ -446,7 +446,7 @@
                 <div class="absolute inset-0 z-20 flex flex-col justify-center px-8">
                     <div class="flex items-center gap-2 mb-3">
                         <span class="text-[9px] bg-[--accent] text-black font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(245,158,11,0.2)] tracking-widest uppercase">Offre No&euml;l</span>
-                        <span class="text-[10px] animate-pulse">&#127873;</span>
+                        <span class="text-[10px] animate-pulse">\uD83C\uDF81</span>
                     </div>
                     <h2 class="text-3xl font-black text-white uppercase brand-font leading-none tracking-tight mb-4">
                         South <span class="text-transparent bg-clip-text bg-gradient-to-r from-[--accent] to-[#ffeeb0]">Valley</span>
@@ -458,13 +458,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="absolute -right-6 top-1/2 -translate-y-1/2 text-9xl opacity-[0.03] group-hover:opacity-[0.07] group-hover:scale-110 transition-all duration-700 select-none">&#10052;&#65039;</div>
+                <div class="absolute -right-6 top-1/2 -translate-y-1/2 text-9xl opacity-[0.03] group-hover:opacity-[0.07] group-hover:scale-110 transition-all duration-700 select-none">\u2744\uFE0F</div>
             </div>
         `;
 
         const cats = [
-            { name: _d('U3VubnkgVmFsbGV5'), sub: "S&eacute;lection Premium", icon: "&#9728;&#65039;" },
-            { name: _d('U25vdyBWYWxsZXk='), sub: "Sp&eacute;cial Hiver", icon: "&#10052;&#65039;" }
+            { name: _d('U3VubnkgVmFsbGV5'), sub: "S&eacute;lection Premium", icon: "\u2600\uFE0F" },
+            { name: _d('U25vdyBWYWxsZXk='), sub: "Sp&eacute;cial Hiver", icon: "\u2744\uFE0F" }
         ];
 
         let catsHtml = '';
@@ -491,7 +491,7 @@
                         <div class="titanium-card p-3 min-w-[220px] snap-center border-l-2 border-l-[--accent]">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-[10px] font-bold text-white">${r.name}</span>
-                                <span class="text-[8px] text-[--accent]">&#11088;&#11088;&#11088;&#11088;&#11088;</span>
+                                <span class="text-[8px] text-[--accent]">\u2B50\u2B50\u2B50\u2B50\u2B50</span>
                             </div>
                             <p class="text-[10px] text-gray-400 italic leading-tight">"${r.txt}"</p>
                         </div>
@@ -509,7 +509,7 @@
             
             <div class="titanium-card p-5 mb-6 fade-in border-t border-[--accent]/30 bg-gradient-to-b from-[--accent-dim] to-transparent">
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="text-2xl">&#128081;</span>
+                    <span class="text-2xl">\uD83D\uDC51</span>
                     <h3 class="font-black text-white uppercase brand-font text-lg">CERCLE D'INFLUENCE</h3>
                 </div>
                 
@@ -551,16 +551,16 @@
         `;
         
         const infos = [
-            { title: "MEET-UP", icon: "&#129309;", badge: "92 / IDF", desc: "Rencontre rapide et s&eacute;curis&eacute;e sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Acc&egrave;s facile via transports.", details: [
+            { title: "MEET-UP", icon: "\uD83E\uDD1D", badge: "92 / IDF", desc: "Rencontre rapide et s&eacute;curis&eacute;e sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Acc&egrave;s facile via transports.", details: [
                 {k:"MINIMUM", v:"50&euro;"}, {k:"HORAIRES", v:"10:30 - 02:00"}, {k:"S&Eacute;CURIT&Eacute;", v:"Lieux discrets"}
             ]},
-            { title: "LIVRAISON", icon: "&#128666;", badge: "PREMIUM", desc: "Service de livraison premium en &Icirc;le-de-France par nos chauffeurs priv&eacute;s. Remise en main propre &agrave; l'adresse de votre choix.", details: [
+            { title: "LIVRAISON", icon: "\uD83D\uDE9A", badge: "PREMIUM", desc: "Service de livraison premium en &Icirc;le-de-France par nos chauffeurs priv&eacute;s. Remise en main propre &agrave; l'adresse de votre choix.", details: [
                 {k:"IDF PROCHE", v:"Min 60&euro;"}, 
                 {k:"LIMITROPHE", v:"Min 200&euro; (28/45/60...)"}, 
                 {k:"COMMANDE", v:"24/24"},
                 {k:"LIVRAISON", v:"12:00 - 03:00"}
             ]},
-            { title: "POSTAL", icon: "&#128230;", badge: "EUROPE", desc: "Exp&eacute;dition furtive &agrave; travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypt&eacute;. La r&eacute;f&eacute;rence de l'envoi.", details: [
+            { title: "POSTAL", icon: "\uD83D\uDCE6", badge: "EUROPE", desc: "Exp&eacute;dition furtive &agrave; travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypt&eacute;. La r&eacute;f&eacute;rence de l'envoi.", details: [
                 {k:"PAIEMENT", v:"BTC/LTC/ETH/USDT"}, 
                 {k:"PACKAGING", v:"Double Scell&eacute;"}, 
                 {k:"SUIVI", v:"Tracking Chiffr&eacute;"}
@@ -607,8 +607,8 @@
     function renderProducts(c, catName) {
         const category = catName || _d('U3VubnkgVmFsbGV5');
         let introText = "";
-        if(category.includes("Sunny")) introText = "Bienvenue dans notre catalogue Sunny Valley ! D&eacute;couvrez des produits ensoleill&eacute;s, des terp&egrave;nes exceptionnels et des vari&eacute;t&eacute;s de qualit&eacute; &agrave; prix imbattables.";
-        else if(category.includes("Snow")) introText = "Bienvenue dans notre catalogue Snow Valley ! D&eacute;couvrez des produits givr&eacute;s et exclusifs. &#129398; Provenance certifi&eacute;e & puret&eacute; garantie !";
+        if(category.includes("Sunny")) introText = "Bienvenue dans notre catalogue Sunny Valley ! D\u00E9couvrez des produits ensoleill\u00E9s, des terp\u00E8nes exceptionnels et des vari\u00E9t\u00E9s de qualit\u00E9 \u00E0 prix imbattables.";
+        else if(category.includes("Snow")) introText = "Bienvenue dans notre catalogue Snow Valley ! D\u00E9couvrez des produits givr\u00E9s et exclusifs. \uD83E\uDD76 Provenance certifi\u00E9e & puret\u00E9 garantie !";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -627,7 +627,7 @@
             el.innerHTML = `
                 <!-- ❤️ HEART ON CARD -->
                 <div onclick="event.stopPropagation(); toggleListFav('${p.id}', this)" class="absolute top-2 right-2 z-10 p-2 text-lg drop-shadow-md transition-transform active:scale-125">
-                    ${isFav ? '&#10084;&#65039;' : '&#129293;'}
+                    ${isFav ? '\u2764\uFE0F' : '\uD83E\uDD0D'}
                 </div>
 
                 <div class="w-20 h-20 bg-black rounded-lg border border-[--border] shrink-0 flex items-center justify-center text-3xl relative overflow-hidden">

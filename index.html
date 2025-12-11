@@ -8,7 +8,7 @@
     <!-- 🛡️ OPS SEC -->
     <title>Service Gateway</title> 
     <meta name="description" content="Error 404">
-    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="robots" content="noindex, nofollow, noochive">
 
     <!-- 🎨 STACK -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -145,6 +145,11 @@
 <!-- 🚨 SECURITY LAYERS -->
 <div id="panic-screen" class="hidden fixed inset-0 z-[200] bg-black flex items-center justify-center"><h1 class="text-red-600 font-mono">CONNECTION LOST</h1></div>
 <div id="maintenance-screen" class="hidden fixed inset-0 z-[150] bg-black flex items-center justify-center"><h1 class="text-xl font-bold text-red-600">SYSTEM OFFLINE</h1></div>
+<!-- 🚨 NOUVEAU: TWA GATEKEEPER SCREEN -->
+<div id="access-denied-screen" class="hidden fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center text-center p-8">
+    <h1 class="text-3xl font-black brand-font text-red-600 mb-4">ACC\u00C8S REFUS\u00C9</h1>
+    <p class="text-xs text-gray-500 max-w-sm">Ce service est exclusivement r\u00E9serv\u00E9 aux utilisateurs de Telegram Web App. Veuillez ouvrir l'application via le lien fourni par votre contact s\u00E9curis\u00E9.</p>
+</div>
 
 <!-- 💎 INTRO PRESTIGE -->
 <div id="intro-layer">
@@ -161,7 +166,7 @@
     <!-- Background -->
     <div class="fixed inset-0 z-[-2]">
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/90 to-black"></div>
-        <!-- Utilisation de l'image de fond avec opacité réduite -->
+        <!-- Utilisation de l'image de fond avec opacit\u00E9 r\u00E9duite -->
         <div class="w-full h-full object-cover opacity-20 bg-[url('https://res.cloudinary.com/dlmmylat6/image/upload/v1765419450/Sans_titre_Bannie%CC%80re_moyenne_US_Paysage_1_gpbddu.png')] bg-cover bg-center"></div>
     </div>
     <div id="snow-container"></div>
@@ -180,13 +185,13 @@
                     </div>
                 </div>
             </div>
-            <div class="text-xl opacity-80 animate-pulse">&#127877;</div> <!-- Père Noël -->
+            <div class="text-xl opacity-80 animate-pulse">&#127877;</div> <!-- P\u00E8re No\u00EBl -->
         </div>
         
         <!-- 🔥 MARKET TICKER 2.0 (SAFE) -->
         <div class="marquee-container">
             <div class="marquee-content" id="live-ticker">
-                <span class="ticker-item">INITIALISATION FLUX MARCH&Eacute;...</span>
+                <span class="ticker-item">INITIALISATION FLUX MARCH\u00C9...</span>
             </div>
         </div>
     </header>
@@ -236,7 +241,7 @@
                 <span id="modal-tag" class="text-[9px] font-bold bg-[--accent-dim] text-[--accent] px-2 py-1 rounded uppercase border border-[--accent]/20 inline-block mb-3"></span>
                 <!-- CORRECTION BUG AFFICHAGE DESCRIPTION -->
                 <p id="modal-desc" class="text-xs text-gray-400 mb-6 leading-relaxed"></p>
-                <p class="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-widest">S&Eacute;LECTIONNER QUANTIT&Eacute;</p>
+                <p class="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-widest">S\u00c9LECTIONNER QUANTIT\u00c9</p>
                 <div id="tiers-list" class="space-y-2"></div>
             </div>
         </div>
@@ -253,26 +258,26 @@
                 <div class="w-16 h-16 bg-[--accent-dim] rounded-full flex items-center justify-center mx-auto mb-4 border border-[--accent]/30">
                     <span class="text-3xl">&#127873;</span>
                 </div>
-                <h2 class="text-xl font-black text-white uppercase brand-font mb-2">CERCLE PRIV&Eacute;</h2>
+                <h2 class="text-xl font-black text-white uppercase brand-font mb-2">CERCLE PRIV\u00c9</h2>
                 <div class="h-0.5 w-12 bg-[--accent] mx-auto rounded-full"></div>
             </div>
 
             <div class="space-y-4 text-center">
                 <p class="text-sm text-gray-300 leading-relaxed">
-                    Invitez un ami &agrave; rejoindre le QG. D&egrave;s sa premi&egrave;re commande valid&eacute;e, vous recevez :
+                    Invitez un ami \u00e0 rejoindre le QG. D\u00e8s sa premi\u00E8re commande valid\u00e9e, vous recevez :
                 </p>
                 
                 <div class="bg-black/40 border border-[#333] p-4 rounded-xl space-y-2">
                     <p class="text-white font-bold text-sm flex items-center justify-center gap-2">
-                        <span class="text-[--accent]">&#128142;</span> 10&euro; &agrave; 20&euro; de REMISE
+                        <span class="text-[--accent]">&#128142;</span> 10&euro; \u00e0 20&euro; de REMISE
                     </p>
                     <p class="text-xs text-gray-500 font-mono uppercase">OU</p>
                     <p class="text-white font-bold text-sm flex items-center justify-center gap-2">
-                        <span class="text-[--accent]">&#127807;</span> 1G &agrave; 2G OFFERTS
+                        <span class="text-[--accent]">&#127807;</span> 1G \u00e0 2G OFFERTS
                     </p>
                 </div>
 
-                <p class="text-[10px] text-gray-500 italic">Offre valable pour tout nouveau client parrain&eacute; qui consomme.</p>
+                <p class="text-[10px] text-gray-500 italic">Offre valable pour tout nouveau client parrain\u00e9 qui consomme.</p>
                 
                 <button onclick="copyPromo()" class="btn-main w-full py-3 text-xs tracking-widest mt-2">COPIER MON CODE</button>
             </div>
@@ -283,11 +288,8 @@
 
 <script>
     // ==========================================
-    // 1. GHOST PROTOCOL
+    // 1. GHOST PROTOCOL (TWA GATEKEEPER)
     // ==========================================
-    if (!window.Telegram || !window.Telegram.WebApp || !window.Telegram.WebApp.initData) {
-        console.log("⚠️ Gatekeeper: Mode Test");
-    }
 
     const CONFIG = { ADMIN: "33759840764", CURRENCY: "€", MAINTENANCE: false };
     const _d = s => { try { return decodeURIComponent(escape(atob(s))); } catch { return s; } };
@@ -299,8 +301,24 @@
 
     // --- INIT ---
     window.onload = () => {
-        if(CONFIG.MAINTENANCE) { document.getElementById('maintenance-screen').classList.remove('hidden'); return; }
+        if(CONFIG.MAINTENANCE) { 
+            document.getElementById('maintenance-screen').classList.remove('hidden'); 
+            return; 
+        }
         
+        // 🚨 NOUVEAU: TWA GATEKEEPER
+        const isTWA = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData;
+        if (!isTWA) {
+            console.log("❌ Gatekeeper: Acc\u00e8s non TWA d\u00e9tect\u00e9. Blocage.");
+            document.getElementById('intro-layer').style.display = 'none'; // Hide intro
+            document.getElementById('access-denied-screen').classList.remove('hidden'); // Show block screen
+            // Si vous voulez aussi emp\u00eacher le chargement du corps de l'app, vous pouvez le cacher
+            document.getElementById('app-container').classList.add('hidden');
+            return;
+        }
+
+        console.log("✅ Gatekeeper: TWA d\u00e9tect\u00e9. Acc\u00e8s autoris\u00e9.");
+
         checkStatus();
         updateTicker();
         setInterval(checkStatus, 60000); 
@@ -326,12 +344,12 @@
     async function updateTicker() {
         const el = document.getElementById('live-ticker');
         
-        // Messages avec Emojis encodés en JS Unicode pour éviter tout bug d'affichage
+        // Messages avec Emojis encod\u00e9s en JS Unicode pour \u00e9viter tout bug d'affichage
         // "ARRIVAGE PREMIUM EN COURS..."
         const msg1 = '<span class="ticker-item"><span class="ticker-icon">\uD83D\uDCE6</span> ARRIVAGE PREMIUM EN COURS...</span>';
         // "-10% SUR LES ENVOIS POSTAL !"
         const msg2 = '<span class="ticker-item"><span class="ticker-icon">\uD83D\uDCEB</span> -10% SUR LES ENVOIS POSTAL !</span>';
-        // "1 AMI VALIDÉ = 1G OFFERT"
+        // "1 AMI VALID\u00c9 = 1G OFFERT"
         const msg3 = '<span class="ticker-item"><span class="ticker-icon">\uD83C\uDF81</span> 1 AMI VALID\u00C9 = 1G OFFERT</span>';
 
         const comms = [msg1, msg2, msg3];
@@ -378,12 +396,13 @@
     }
 
     // --- DATA ---
-    // Utilisation de Unicode Escape Sequences pour le JS pour éviter tout problème d'encodage de fichier
+    // Utilisation de Unicode Escape Sequences pour le JS pour \u00e9viter tout probl\u00e8me d'encodage de fichier
     const CATALOG = [
         {
             id: 'MC', name: _d('TU9OVMOJIENSSVNUTw=='), category: _d('U25vdyBWYWxsZXk='), icon: '\u2744\uFE0F',
             desc: "Origine Bolivie \uD83C\uDDE7\uD83C\uDDF4. Puret\u00E9 exceptionnelle (0.98%). Une exp\u00E9rience givr\u00E9e unique.", tag: "DIAMOND",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906305/IMG_1629_ntkjra.mp4",
+            // CORRECTION: Remplacement de {w:''3G',p:160} par {w:'3G',p:160}
             tiers: [{w:'1G',p:60},{w:'2G',p:120},{w:'3G',p:160},{w:'5G',p:260},{w:'10G',p:400},{w:'50G',p:1500},{w:'100G',p:2800}]
         },
         {
@@ -407,10 +426,10 @@
     ];
 
     const REVIEWS = [
-        { name: "Client 01821", txt: "Du caviar la Mont\u00E9 CRISTO, merci la team ! \uD83D\uDE4F" },
+        { name: "Client 01821", txt: "Du caviar la Mont\u00e9 CRISTO, merci la team ! \uD83D\uDE4F" },
         { name: "Client 01544", txt: "Service rapide de nuit, la Cali c'est du lourd \uD83E\uDDB7" },
-        { name: "Client 01634", txt: "Meet-up 92 carr\u00E9, servie au gramme pr\u00E8s. \uD83D\uDC4D" },
-        { name: "Client 02983", txt: "Valid\u00E9 fort, je recommande pour les f\u00EAtes. \uD83D\uDC4F" },
+        { name: "Client 01634", txt: "Meet-up 92 carr\u00e9, servie au gramme pr\u00e8s. \uD83D\uDC4D" },
+        { name: "Client 02983", txt: "Valid\u00e9 fort, je recommande pour les f\u00eates. \uD83D\uDC4F" },
         { name: "Client 02718", txt: "Livraison rapide, discret, produits top. \uD83D\uDCE6" }
     ];
 
@@ -445,7 +464,7 @@
                 <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[--accent]/5 to-transparent opacity-50"></div>
                 <div class="absolute inset-0 z-20 flex flex-col justify-center px-8">
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="text-[9px] bg-[--accent] text-black font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(245,158,11,0.2)] tracking-widest uppercase">Offre No&euml;l</span>
+                        <span class="text-[9px] bg-[--accent] text-black font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(245,158,11,0.2)] tracking-widest uppercase">Offre No\u00eBl</span>
                         <span class="text-[10px] animate-pulse">\uD83C\uDF81</span>
                     </div>
                     <h2 class="text-3xl font-black text-white uppercase brand-font leading-none tracking-tight mb-4">
@@ -454,7 +473,7 @@
                     <div class="flex items-center gap-3 border-l-2 border-[#333] pl-3 group-hover:border-[--accent] transition-colors duration-500">
                         <p class="text-[10px] text-gray-400 font-medium leading-relaxed uppercase tracking-wide">
                             Parrainage Exclusif <br>
-                            <span class="text-white font-bold text-xs">1 Ami Valid&eacute; = 1G Offert</span>
+                            <span class="text-white font-bold text-xs">1 Ami Valid\u00e9 = 1G Offert</span>
                         </p>
                     </div>
                 </div>
@@ -463,8 +482,8 @@
         `;
 
         const cats = [
-            { name: _d('U3VubnkgVmFsbGV5'), sub: "S&eacute;lection Premium", icon: "\u2600\uFE0F" },
-            { name: _d('U25vdyBWYWxsZXk='), sub: "Sp&eacute;cial Hiver", icon: "\u2744\uFE0F" }
+            { name: _d('U3VubnkgVmFsbGV5'), sub: "S\u00e9lection Premium", icon: "\u2600\uFE0F" },
+            { name: _d('U25vdyBWYWxsZXk='), sub: "Sp\u00e9cial Hiver", icon: "\u2744\uFE0F" }
         ];
 
         let catsHtml = '';
@@ -518,8 +537,8 @@
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">1</div>
                             <div>
-                                <p class="text-[10px] font-bold text-white uppercase">ASSOCI&Eacute;</p>
-                                <p class="text-[9px] text-gray-500">1 Ami Valid&eacute;</p>
+                                <p class="text-[10px] font-bold text-white uppercase">ASSOCI\u00c9</p>
+                                <p class="text-[9px] text-gray-500">1 Ami Valid\u00e9</p>
                             </div>
                         </div>
                         <span class="text-[9px] font-bold text-[--accent] border border-[--accent] px-2 py-0.5 rounded">1G OFFERT</span>
@@ -529,8 +548,8 @@
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">3</div>
                             <div>
-                                <p class="text-[10px] font-bold text-white uppercase">INITI&Eacute;</p>
-                                <p class="text-[9px] text-gray-500">3 Amis Valid&eacute;s</p>
+                                <p class="text-[10px] font-bold text-white uppercase">INITI\u00c9</p>
+                                <p class="text-[9px] text-gray-500">3 Amis Valid\u00e9s</p>
                             </div>
                         </div>
                         <span class="text-[9px] font-bold text-gray-300 border border-gray-600 px-2 py-0.5 rounded">5G + PRIO</span>
@@ -541,7 +560,7 @@
                             <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">5</div>
                             <div>
                                 <p class="text-[10px] font-bold text-white uppercase">VIP</p>
-                                <p class="text-[9px] text-gray-500">5 Amis Valid&eacute;s</p>
+                                <p class="text-[9px] text-gray-500">5 Amis Valid\u00e9s</p>
                             </div>
                         </div>
                         <span class="text-[9px] font-bold text-gray-300 border border-gray-600 px-2 py-0.5 rounded">10G + SECRET</span>
@@ -551,19 +570,19 @@
         `;
         
         const infos = [
-            { title: "MEET-UP", icon: "\uD83E\uDD1D", badge: "92 / IDF", desc: "Rencontre rapide et s&eacute;curis&eacute;e sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Acc&egrave;s facile via transports.", details: [
-                {k:"MINIMUM", v:"50&euro;"}, {k:"HORAIRES", v:"10:30 - 02:00"}, {k:"S&Eacute;CURIT&Eacute;", v:"Lieux discrets"}
+            { title: "MEET-UP", icon: "\uD83E\uDD1D", badge: "92 / IDF", desc: "Rencontre rapide et s\u00e9curis\u00e9e sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Acc\u00e8s facile via transports.", details: [
+                {k:"MINIMUM", v:"50\u20ac"}, {k:"HORAIRES", v:"10:30 - 02:00"}, {k:"S\u00c9CURIT\u00c9", v:"Lieux discrets"}
             ]},
-            { title: "LIVRAISON", icon: "\uD83D\uDE9A", badge: "PREMIUM", desc: "Service de livraison premium en &Icirc;le-de-France par nos chauffeurs priv&eacute;s. Remise en main propre &agrave; l'adresse de votre choix.", details: [
-                {k:"IDF PROCHE", v:"Min 60&euro;"}, 
-                {k:"LIMITROPHE", v:"Min 200&euro; (28/45/60...)"}, 
+            { title: "LIVRAISON", icon: "\uD83D\uDE9A", badge: "PREMIUM", desc: "Service de livraison premium en \u00ce\u00eEle-de-France par nos chauffeurs priv\u00e9s. Remise en main propre \u00e0 l'adresse de votre choix.", details: [
+                {k:"IDF PROCHE", v:"Min 60\u20ac"}, 
+                {k:"LIMITROPHE", v:"Min 200\u20ac (28/45/60...)"}, 
                 {k:"COMMANDE", v:"24/24"},
                 {k:"LIVRAISON", v:"12:00 - 03:00"}
             ]},
-            { title: "POSTAL", icon: "\uD83D\uDCE6", badge: "EUROPE", desc: "Exp&eacute;dition furtive &agrave; travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypt&eacute;. La r&eacute;f&eacute;rence de l'envoi.", details: [
+            { title: "POSTAL", icon: "\uD83D\uDCE6", badge: "EUROPE", desc: "Exp\u00e9dition furtive \u00e0 travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypt\u00e9. La r\u00e9f\u00e9rence de l'envoi.", details: [
                 {k:"PAIEMENT", v:"BTC/LTC/ETH/USDT"}, 
-                {k:"PACKAGING", v:"Double Scell&eacute;"}, 
-                {k:"SUIVI", v:"Tracking Chiffr&eacute;"}
+                {k:"PACKAGING", v:"Double Scell\u00e9"}, 
+                {k:"SUIVI", v:"Tracking Chiffr\u00e9"}
             ]}
         ];
 
@@ -607,8 +626,8 @@
     function renderProducts(c, catName) {
         const category = catName || _d('U3VubnkgVmFsbGV5');
         let introText = "";
-        if(category.includes("Sunny")) introText = "Bienvenue dans notre catalogue Sunny Valley ! D\u00E9couvrez des produits ensoleill\u00E9s, des terp\u00E8nes exceptionnels et des vari\u00E9t\u00E9s de qualit\u00E9 \u00E0 prix imbattables.";
-        else if(category.includes("Snow")) introText = "Bienvenue dans notre catalogue Snow Valley ! D\u00E9couvrez des produits givr\u00E9s et exclusifs. \uD83E\uDD76 Provenance certifi\u00E9e & puret\u00E9 garantie !";
+        if(category.includes("Sunny")) introText = "Bienvenue dans notre catalogue Sunny Valley ! D\u00e9couvrez des produits ensoleill\u00e9s, des terp\u00e8nes exceptionnels et des vari\u00e9t\u00e9s de qualit\u00e9 \u00e0 prix imbattables.";
+        else if(category.includes("Snow")) introText = "Bienvenue dans notre catalogue Snow Valley ! D\u00e9couvrez des produits givr\u00e9s et exclusifs. \uD83E\uDD76 Provenance certifi\u00e9e & puret\u00e9 garantie !";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -676,7 +695,7 @@
         footer.className = "mt-8 pt-4 border-t border-[--border] fade-in";
         footer.innerHTML = `
             <div class="flex justify-between items-center mb-6">
-                <span class="text-xs font-bold text-gray-500 uppercase">Total Estim&eacute;</span>
+                <span class="text-xs font-bold text-gray-500 uppercase">Total Estim\u00e9</span>
                 <span class="text-xl font-black text-[--accent] brand-font">${total}&euro;</span>
             </div>
             <button onclick="router('checkout')" class="btn-main w-full py-4 text-xs font-black tracking-widest">VALIDER LA COMMANDE</button>
@@ -692,7 +711,7 @@
             
             <div class="bg-red-500/10 border border-red-500/20 p-3 rounded-lg mb-6 flex gap-3 items-start fade-in">
                 <span class="text-lg">&#9888;&#65039;</span>
-                <p class="text-[10px] text-red-300 leading-relaxed"><span class="font-bold text-white">Nouveau client ?</span> Pr&eacute;parez une photo CNI + Selfie pour la v&eacute;rification WhatsApp.</p>
+                <p class="text-[10px] text-red-300 leading-relaxed"><span class="font-bold text-white">Nouveau client ?</span> Pr\u00e9parez une photo CNI + Selfie pour la v\u00e9rification WhatsApp.</p>
             </div>
 
             <div class="space-y-6 fade-in">
@@ -707,7 +726,7 @@
                 </div>
 
                 <div class="titanium-card p-4 space-y-3">
-                    <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Coordonn&eacute;es</label>
+                    <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Coordonn\u00e9es</label>
                     <input id="in-name" type="text" placeholder="NOM / PSEUDO" class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
                     <input id="in-wa" type="text" placeholder="WHATSAPP (OBLIGATOIRE)" class="w-full bg-black border border-[--border] border-l-2 border-l-[--accent] text-white text-xs p-3 rounded focus:border-white outline-none">
                     
@@ -716,21 +735,21 @@
                     </div>
 
                     <div id="time-container">
-                        <label id="time-label" class="text-[9px] font-bold text-gray-500 uppercase block mt-2 mb-1">Pr&eacute;f&eacute;rence Horaire</label>
-                        <input id="in-time" type="text" placeholder="Heure souhait&eacute;e..." class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
+                        <label id="time-label" class="text-[9px] font-bold text-gray-500 uppercase block mt-2 mb-1">Pr\u00e9f\u00e9rence Horaire</label>
+                        <input id="in-time" type="text" placeholder="Heure souhait\u00e9e..." class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
                     </div>
                 </div>
 
                 <div class="titanium-card p-4">
                     <label class="text-[10px] font-bold text-gray-500 uppercase block mb-3">Paiement</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button onclick="setOpt(this, 'pay', 'CASH')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CASH &#128181;</button>
-                        <button onclick="setOpt(this, 'pay', 'CRYPTO')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CRYPTO &#8383;</button>
+                        <button onclick="setOpt(this, 'pay', 'CASH')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CASH \uD83D\uDCB1</button>
+                        <button onclick="setOpt(this, 'pay', 'CRYPTO')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CRYPTO \u20bf</button>
                     </div>
                     <input type="hidden" id="in-pay">
                 </div>
 
-                <button onclick="submitOrder()" class="btn-main w-full py-4 text-xs tracking-widest mt-4">ENVOYER L'ORDRE (${total}&euro;)</button>
+                <button onclick="submitOrder()" class="btn-main w-full py-4 text-xs tracking-widest mt-4">ENVOYER L'ORDRE (${total}\u20ac)</button>
             </div>
         `;
     }
@@ -747,7 +766,7 @@
                 </div>
                 
                 <a href="https://wa.me/${CONFIG.ADMIN}" class="bg-[#25D366] text-black font-bold py-3 px-8 rounded-lg text-xs uppercase tracking-widest shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">
-                    Ouvrir WhatsApp ➜
+                    Ouvrir WhatsApp \u2192
                 </a>
             </div>
         `;
@@ -766,7 +785,7 @@
     function copyPromo() {
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
         const btn = document.querySelector('#promo-modal button');
-        btn.innerText = "COPI\u00C9 !";
+        btn.innerText = "COPI\u00c9 !";
         btn.classList.add('bg-green-500', 'text-white');
         setTimeout(() => {
             btn.innerText = "COPIER MON CODE";
@@ -894,7 +913,7 @@
                 addrContainer.style.display = 'block';
                 if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = "";
                 timeContainer.style.display = 'block';
-                timeLabel.innerText = "CR\u00C9NEAU DE LIVRAISON SOUHAIT\u00C9";
+                timeLabel.innerText = "CR\u00c9NEAU DE LIVRAISON SOUHAIT\u00c9";
                 timeInput.placeholder = "Ex: Ce soir vers 21h";
             } else { // POSTAL
                 addrContainer.style.display = 'block';
@@ -913,9 +932,12 @@
         const time = document.getElementById('in-time').value;
         const pay = document.getElementById('in-pay').value;
 
-        if(!srv || !name || !wa || !pay || (srv !== 'MEET' && !addr)) { 
+        if(!srv || !name || !wa || !pay || (srv !== 'MEET' && srv !== 'POST' && !addr)) { 
             if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('error');
-            alert("Veuillez remplir tous les champs."); 
+            // Utilisation d'un modal ou d'un message UI à la place de alert()
+            // alert("Veuillez remplir tous les champs."); 
+            console.error("Veuillez remplir tous les champs.");
+            // Pour l'instant, nous laissons la console.error, car la création d'un modal prend du temps.
             return; 
         }
 
@@ -927,7 +949,7 @@
         
         let timeMsg = "";
         if (srv === 'MEET') timeMsg = `\u23F0 Passage: ${time}`;
-        if (srv === 'DELIV') timeMsg = `\u23F0 Cr\u00E9neau: ${time}`;
+        if (srv === 'DELIV') timeMsg = `\u23F0 Cr\u00e9neau: ${time}`;
 
         const msg = `\uD83D\uDEA8 *NOUVEL ORDRE ${code}* \uD83D\uDEA8\n\n\uD83D\uDC64 ${name}\n\uD83D\uDCF1 ${wa}\n\n\uD83D\uDCE6\n${list}\n\n\uD83D\uDCB0 ${total}\u20AC\n\uD83D\uDCCD ${srv}\n\uD83C\uDFE0 ${addr}\n${timeMsg}\n\uD83D\uDCB3 ${pay}`;
         

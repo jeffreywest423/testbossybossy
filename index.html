@@ -138,6 +138,14 @@
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Select custom arrow */
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -230,7 +238,11 @@
     <div id="product-modal" class="fixed inset-0 z-[60] bg-black/90 hidden flex items-end sm:items-center justify-center backdrop-blur-sm p-0 sm:p-4">
         <div id="modal-content" class="bg-[#111] w-full max-w-sm h-[85vh] sm:h-auto sm:max-h-[80vh] sm:rounded-2xl rounded-t-3xl border-t border-[--border] shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300">
             <div class="relative w-full h-56 bg-black shrink-0 sm:rounded-t-2xl overflow-hidden">
-                <video id="modal-video" class="w-full h-full object-cover" loop muted playsinline autoplay onerror="handleVideoError(this)"></video>
+                <!-- VIDEO -->
+                <video id="modal-video" class="w-full h-full object-cover hidden" loop muted playsinline autoplay onerror="handleVideoError(this)"></video>
+                <!-- NEW: Image tag for JPG support -->
+                <img id="modal-image" class="w-full h-full object-cover hidden transition-opacity duration-500" src="" alt="Product">
+                
                 <div class="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent"></div>
                 <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md z-10">✕</button>
             </div>
@@ -242,7 +254,13 @@
                 </div>
                 <span id="modal-tag" class="text-[9px] font-bold bg-[--accent-dim] text-[--accent] px-2 py-1 rounded uppercase border border-[--accent]/20 inline-block mb-3"></span>
                 <!-- CORRECTION BUG AFFICHAGE DESCRIPTION -->
-                <p id="modal-desc" class="text-xs text-gray-400 mb-6 leading-relaxed"></p>
+                <p id="modal-desc" class="text-xs text-gray-400 mb-6 leading-relaxed whitespace-pre-line"></p>
+                
+                <!-- NEW: STRAIN SELECTOR -->
+                <div id="modal-variants" class="mb-4 hidden">
+                    <!-- Populated via JS -->
+                </div>
+
                 <p class="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-widest">SÉLECTIONNER QUANTITÉ</p>
                 <div id="tiers-list" class="space-y-2"></div>
             </div>
@@ -308,6 +326,7 @@
     let cart = [];
     let favorites = JSON.parse(localStorage.getItem('sv_favs') || '[]');
     let currentModalId = null;
+    let carouselInterval = null;
 
     // --- UTILS UI ---
     function showUIMessage(title, body) {
@@ -318,15 +337,11 @@
     }
 
     function handleVideoError(videoElement) {
-        console.error("Erreur de chargement de la vid\u00e9o. Utilisation du placeholder.");
-        // Create a simple placeholder if video fails to load
-        videoElement.style.display = 'none';
-        const container = videoElement.parentElement;
-        container.innerHTML += `
-            <div class="absolute inset-0 flex items-center justify-center bg-[#050505] text-gray-600 text-xs font-mono">
-                VIDEO N/A
-            </div>
-        `;
+        // If video fails (and it's supposed to be a video), show placeholder
+        if(!videoElement.classList.contains('hidden')) {
+             console.error("Erreur vid\u00e9o");
+             videoElement.style.display = 'none';
+        }
     }
 
     // --- INIT ---
@@ -337,16 +352,20 @@
         }
         
         // 🚨 NOUVEAU: TWA GATEKEEPER
+        // Pour le mode développement en Web (hors Telegram), on bypass le check si pas de WebApp
         const isTWA = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData;
-        if (!isTWA) {
-            console.log("❌ Gatekeeper: Acc\u00e8s non TWA d\u00e9tect\u00e9. Blocage.");
-            document.getElementById('intro-layer').style.display = 'none'; // Hide intro
-            document.getElementById('access-denied-screen').classList.remove('hidden'); // Show block screen
-            document.getElementById('app-container').classList.add('hidden');
-            return;
+        const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        
+        // Note: En prod, retirer "|| true" pour activer le gatekeeper
+        if (!isTWA && !isDev && !document.referrer) {
+            // console.log("❌ Gatekeeper: Acc\u00e8s non TWA d\u00e9tect\u00e9.");
+            // document.getElementById('intro-layer').style.display = 'none'; 
+            // document.getElementById('access-denied-screen').classList.remove('hidden'); 
+            // document.getElementById('app-container').classList.add('hidden');
+            // return;
         }
 
-        console.log("✅ Gatekeeper: TWA d\u00e9tect\u00e9. Acc\u00e8s autoris\u00e9.");
+        console.log("✅ Gatekeeper: Acc\u00e8s autoris\u00e9.");
 
         checkStatus();
         updateTicker();
@@ -427,7 +446,27 @@
     }
 
     // --- DATA ---
+    const TIERS_WIZARD = [{w:'5G (1/2)',p:80},{w:'10G (1)',p:170}];
+
     const CATALOG = [
+        // --- ZAZA VALLEY / WIZARD TREEZ (FROZEN) -> MOVED TO SUNNY VALLEY ---
+        {
+            id: 'WZ-ALL', name: "Olives Wizard Treez - Frozen Sift 🧊🧙‍♀️", category: _d('U3VubnkgVmFsbGV5'), icon: '🧙‍♀️',
+            desc: "🇺🇸 CALI CONNECTION EXCLUSIVE 🇺🇸\n\nLE TERROIR WIZARD TREEZ DÉBARQUE !\n\n5 STRAINS LÉGENDAIRES RÉUNIES :\n🍌 Honey Banana\n👑 DREAM Queen\n🍇 Forbidden Fruits\n🍏 Apple GELATO\n🍩 OG DONUTZ\n\n🧊 FROZEN SIFT PREMIUM\n🌡️ COLD CURED STORAGE\n🍬 TERPS EXPLOSIFS\n\n⚠️ STOCK ULTRA LIMITÉ - PREMIER ARRIVÉ PREMIER SERVI !", tag: "WIZARD TREEZ",
+            video: "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993841/IMG_2073_ffmyfd.jpg", 
+            images: [
+                "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993841/IMG_2073_ffmyfd.jpg",
+                "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993836/IMG_2063_obzpid.jpg",
+                "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993835/IMG_2071_hlq6qq.jpg",
+                "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993835/IMG_2070_s2i4im.jpg",
+                "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993834/IMG_2072_ppyr6d.jpg"
+            ],
+            tiers: TIERS_WIZARD,
+            // ✨ NOUVEAU: Liste des variétés pour le sélecteur
+            variants: ["Honey Banana", "DREAM Queen", "Forbidden Fruits", "Apple GELATO", "OG DONUTZ"]
+        },
+        
+        // --- ANCIEN CATALOGUE ---
         {
             id: 'MC', name: _d('TU9OVMOJIENSSVNUTw=='), category: _d('U25vdyBWYWxsZXk='), icon: '❄️',
             desc: "Origine Bolivie 🇧🇴. Pureté exceptionnelle (0.98%). Une expérience givrée unique.", tag: "DIAMOND",
@@ -511,8 +550,8 @@
         `;
 
         const cats = [
-            { name: _d('U3VubnkgVmFsbGV5'), sub: "Sélection Premium", icon: "☀️" },
-            { name: _d('U25vdyBWYWxsZXk='), sub: "Spécial Hiver", icon: "❄️" }
+            { name: _d('U3VubnkgVmFsbGV5'), sub: "CALI CONNECT • TOP SHELF • EXOTIC", icon: "☀️" },
+            { name: _d('U25vdyBWYWxsZXk='), sub: "Festivité - Expérience givrée garantie", icon: "❄️" }
         ];
 
         let catsHtml = '';
@@ -655,8 +694,8 @@
     function renderProducts(c, catName) {
         const category = catName || _d('U3VubnkgVmFsbGV5');
         let introText = "";
-        if(category.includes("Sunny")) introText = "Bienvenue dans notre catalogue Sunny Valley ! Découvrez des produits ensoleillés, des terpènes exceptionnels et des variétés de qualité à prix imbattables.";
-        else if(category.includes("Snow")) introText = "Bienvenue dans notre catalogue Snow Valley ! Découvrez des produits givrés et exclusifs. 🥶 Provenance certifiée & pureté garantie !";
+        if(category.includes("Sunny")) introText = "💎 SÉLECTION EXCLUSIVE CALIFORNIA. Direct from Farms. Terpènes validés, génétiques rares et connexions officielles. Le soleil en pochon.";
+        else if(category.includes("Snow")) introText = "❄️ Menu Festif - Exclusivités givrées & pureté garantie ! Sélection premium & validée ! 🥳";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -867,10 +906,68 @@
         favBtn.innerText = favorites.includes(p.id) ? '❤️' : '🤍';
 
         const vid = document.getElementById('modal-video');
-        vid.src = p.video; 
-        // Force reload and play video
-        vid.load();
-        vid.play().catch(e => console.log("Vid\u00e9o n'a pas pu \u00eatre jou\u00e9e automatiquement:", e));
+        const img = document.getElementById('modal-image');
+
+        // Reset state
+        clearInterval(carouselInterval);
+
+        // CHECK IF CAROUSEL MODE (Multiple Images)
+        if (p.images && p.images.length > 1) {
+            vid.classList.add('hidden');
+            vid.pause();
+            img.classList.remove('hidden');
+            
+            let imgIdx = 0;
+            img.src = p.images[0];
+            
+            carouselInterval = setInterval(() => {
+                imgIdx = (imgIdx + 1) % p.images.length;
+                img.src = p.images[imgIdx];
+            }, 2500); // Change image every 2.5s
+        } else {
+            // SINGLE MEDIA LOGIC
+            const isVideo = p.video.endsWith('.mp4') || p.video.endsWith('.mov');
+
+            if(isVideo) {
+                img.classList.add('hidden');
+                vid.classList.remove('hidden');
+                vid.src = p.video; 
+                vid.load();
+                vid.play().catch(e => console.log("Vid\u00e9o n'a pas pu \u00eatre jou\u00e9e automatiquement:", e));
+            } else {
+                // It's an image
+                vid.classList.add('hidden');
+                vid.pause();
+                img.classList.remove('hidden');
+                img.src = p.video;
+            }
+        }
+
+        // ✨ VARIANT LOGIC
+        const variantContainer = document.getElementById('modal-variants');
+        variantContainer.innerHTML = ''; // Clear prev options
+        if (p.variants && p.variants.length > 0) {
+            variantContainer.classList.remove('hidden');
+            const label = document.createElement('label');
+            label.className = "text-[10px] font-bold text-gray-500 uppercase mb-2 block tracking-widest";
+            label.innerText = "CHOISIR VARIÉTÉ";
+            
+            const select = document.createElement('select');
+            select.id = 'variant-select';
+            select.className = "w-full bg-[#1a1a1a] text-white text-xs p-3 rounded border border-[#222] focus:border-[#F59E0B] outline-none appearance-none font-bold uppercase";
+            
+            p.variants.forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v;
+                opt.innerText = v;
+                select.appendChild(opt);
+            });
+            
+            variantContainer.appendChild(label);
+            variantContainer.appendChild(select);
+        } else {
+            variantContainer.classList.add('hidden');
+        }
 
         const list = document.getElementById('tiers-list');
         list.innerHTML = p.tiers.map(t => `
@@ -891,6 +988,10 @@
     function closeModal() {
         const modal = document.getElementById('product-modal');
         const content = document.getElementById('modal-content');
+        
+        // Stop Carousel
+        clearInterval(carouselInterval);
+
         content.classList.add('translate-y-full');
         setTimeout(() => {
             modal.classList.add('hidden');
@@ -900,8 +1001,15 @@
     }
 
     function addItem(n, w, p) {
+        // ✨ CHECK FOR VARIANT SELECTION
+        const select = document.getElementById('variant-select');
+        let finalName = n;
+        if (select && document.getElementById('modal-variants').offsetParent !== null) {
+             finalName = `${n} [${select.value}]`;
+        }
+
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
-        cart.push({name: n, weight: w, price: p});
+        cart.push({name: finalName, weight: w, price: p});
         closeModal();
         updateDot();
     }

@@ -65,6 +65,16 @@
         }
         .btn-main:active { transform: scale(0.98); }
 
+        .btn-upsell {
+            background: linear-gradient(to right, #ec4899, #8b5cf6);
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+            border-radius: 10px;
+        }
+
         /* --- MARKET TICKER --- */
         .marquee-container {
             overflow: hidden;
@@ -153,7 +163,7 @@
 <!-- 🚨 SECURITY LAYERS -->
 <div id="panic-screen" class="hidden fixed inset-0 z-[200] bg-black flex items-center justify-center"><h1 class="text-red-600 font-mono">CONNECTION LOST</h1></div>
 <div id="maintenance-screen" class="hidden fixed inset-0 z-[150] bg-black flex items-center justify-center"><h1 class="text-xl font-bold text-red-600">SYSTEM OFFLINE</h1></div>
-<!-- 🚨 NOUVEAU: TWA GATEKEEPER SCREEN -->
+<!-- TWA GATEKEEPER SCREEN -->
 <div id="access-denied-screen" class="hidden fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center text-center p-8">
     <h1 class="text-3xl font-black brand-font text-red-600 mb-4">ACCÈS REFUSÉ</h1>
     <p class="text-xs text-gray-500 max-w-sm">Ce service est exclusivement réservé aux utilisateurs de Telegram Web App. Veuillez ouvrir l'application via le lien fourni par votre contact sécurisé.</p>
@@ -162,7 +172,6 @@
 <!-- 💎 INTRO PRESTIGE -->
 <div id="intro-layer">
     <div class="logo-container">
-        <!-- Ajout onerror pour la robustesse de l'image -->
         <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" onerror="this.src='https://placehold.co/120x120/000/FFF?text=SV';" class="logo-img">
     </div>
     <div class="loading-line"></div>
@@ -175,7 +184,6 @@
     <!-- Background -->
     <div class="fixed inset-0 z-[-2]">
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/90 to-black"></div>
-        <!-- Utilisation de l'image de fond avec opacité réduite -->
         <div class="w-full h-full object-cover opacity-20 bg-[url('https://res.cloudinary.com/dlmmylat6/image/upload/v1765419450/Sans_titre_Bannie%CC%80re_moyenne_US_Paysage_1_gpbddu.png')] bg-cover bg-center" onerror="this.style.backgroundImage='none'; this.style.backgroundColor='#0a0a0a';"></div>
     </div>
     <div id="snow-container"></div>
@@ -185,7 +193,6 @@
     <header class="bg-black/80 backdrop-blur-md z-40 shrink-0 border-b border-white/5">
         <div class="h-14 px-5 flex items-center justify-between">
             <div class="flex items-center gap-3" onclick="router('menu')">
-                <!-- Ajout onerror pour la robustesse de l'image -->
                 <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" onerror="this.style.display='none';" class="h-10 w-auto drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">
                 <div>
                     <h1 class="text-xs font-black text-white uppercase tracking-wider brand-font">South Valley</h1>
@@ -195,7 +202,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-xl opacity-80 animate-pulse">🎅</div> <!-- Père Noël -->
+            <div class="text-xl opacity-80 animate-pulse">🎅</div>
         </div>
         
         <!-- 🔥 MARKET TICKER 2.0 (SAFE) -->
@@ -211,25 +218,25 @@
         <!-- Dynamic Content -->
     </main>
 
-    <!-- NAV BAR (ICONES UNICODE SAFE) -->
+    <!-- NAV BAR -->
     <nav class="nav-glass fixed bottom-0 w-full h-16 pb-safe z-50 flex justify-around items-center px-2">
         <button onclick="router('menu')" id="nav-menu" class="flex flex-col items-center justify-center w-16 opacity-50 transition-all">
-            <span class="text-xl mb-1">🏠</span> <!-- Maison -->
+            <span class="text-xl mb-1">🏠</span>
             <span class="text-[9px] font-bold uppercase tracking-wide">QG</span>
         </button>
         <button onclick="router('products')" id="nav-products" class="flex flex-col items-center justify-center w-16 opacity-50 transition-all">
-            <span class="text-xl mb-1">📋</span> <!-- Scroll -->
+            <span class="text-xl mb-1">📋</span>
             <span class="text-[9px] font-bold uppercase tracking-wide">Menu</span>
         </button>
         <button onclick="router('cart')" id="nav-cart" class="flex flex-col items-center justify-center w-16 opacity-50 transition-all relative">
             <div class="relative">
-                <span class="text-xl mb-1">🛍️</span> <!-- Sac -->
+                <span class="text-xl mb-1">🛍️</span>
                 <span id="cart-dot" class="absolute -top-1 -right-1 w-2 h-2 bg-[--accent] rounded-full hidden"></span>
             </div>
             <span class="text-[9px] font-bold uppercase tracking-wide">Panier</span>
         </button>
         <button onclick="router('infos')" id="nav-infos" class="flex flex-col items-center justify-center w-16 opacity-50 transition-all">
-            <span class="text-xl mb-1">📡</span> <!-- Satellite -->
+            <span class="text-xl mb-1">📡</span>
             <span class="text-[9px] font-bold uppercase tracking-wide">Infos</span>
         </button>
     </nav>
@@ -238,31 +245,61 @@
     <div id="product-modal" class="fixed inset-0 z-[60] bg-black/90 hidden flex items-end sm:items-center justify-center backdrop-blur-sm p-0 sm:p-4">
         <div id="modal-content" class="bg-[#111] w-full max-w-sm h-[85vh] sm:h-auto sm:max-h-[80vh] sm:rounded-2xl rounded-t-3xl border-t border-[--border] shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300">
             <div class="relative w-full h-56 bg-black shrink-0 sm:rounded-t-2xl overflow-hidden">
-                <!-- VIDEO -->
                 <video id="modal-video" class="w-full h-full object-cover hidden" loop muted playsinline autoplay onerror="handleVideoError(this)"></video>
-                <!-- NEW: Image tag for JPG support -->
                 <img id="modal-image" class="w-full h-full object-cover hidden transition-opacity duration-500" src="" alt="Product">
-                
                 <div class="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent"></div>
                 <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md z-10">✕</button>
             </div>
             <div class="p-6 flex-1 overflow-y-auto">
                 <div class="flex justify-between items-start mb-2">
-                    <h2 id="modal-title" class="text-xl font-black text-white uppercase brand-font"></h2>
-                    <!-- ❤️ FAVORITE BUTTON -->
+                    <div class="flex items-center gap-3">
+                        <h2 id="modal-title" class="text-xl font-black text-white uppercase brand-font"></h2>
+                        <img id="modal-brand-logo" src="" class="h-6 w-auto hidden" alt="Brand Logo">
+                    </div>
                     <button onclick="toggleModalFav()" id="modal-fav-btn" class="text-2xl transition-transform active:scale-90">🤍</button>
                 </div>
                 <span id="modal-tag" class="text-[9px] font-bold bg-[--accent-dim] text-[--accent] px-2 py-1 rounded uppercase border border-[--accent]/20 inline-block mb-3"></span>
-                <!-- CORRECTION BUG AFFICHAGE DESCRIPTION -->
                 <p id="modal-desc" class="text-xs text-gray-400 mb-6 leading-relaxed whitespace-pre-line"></p>
-                
-                <!-- NEW: STRAIN SELECTOR -->
-                <div id="modal-variants" class="mb-4 hidden">
-                    <!-- Populated via JS -->
-                </div>
-
+                <div id="modal-variants" class="mb-4 hidden"></div>
                 <p class="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-widest">SÉLECTIONNER QUANTITÉ</p>
                 <div id="tiers-list" class="space-y-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🚀 UPSELL MODAL (LE PIÈGE À CASH) -->
+    <div id="upsell-modal" class="fixed inset-0 z-[80] bg-black/95 hidden flex items-center justify-center backdrop-blur-md p-4">
+        <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-purple-500/50 w-full max-w-sm rounded-2xl p-1 relative overflow-hidden shadow-[0_0_50px_rgba(168,85,247,0.2)]">
+            <div class="bg-[#050505] rounded-xl p-5 relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-600 blur-[60px] opacity-20"></div>
+                
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg animate-pulse">⚡</span>
+                        <h2 class="text-xl font-black text-white uppercase brand-font italic">OFFRE FLASH</h2>
+                    </div>
+                    <button onclick="closeUpsell()" class="text-gray-500 hover:text-white">✕</button>
+                </div>
+
+                <div class="flex gap-4 mb-4">
+                    <div class="w-20 h-20 rounded-lg bg-black border border-purple-500/30 overflow-hidden shrink-0">
+                        <video src="https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov" class="w-full h-full object-cover" autoplay loop muted></video>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white uppercase leading-tight mb-1">Cali Pink Kush 🇺🇸</h3>
+                        <p class="text-[10px] text-gray-400 mb-2">Ajoutez 3G de Top Shelf à votre commande pour une misère.</p>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-black text-green-400">20€</span>
+                            <span class="text-xs text-gray-500 line-through">45€</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="addUpsell()" class="btn-upsell w-full py-3 text-xs tracking-widest flex items-center justify-center gap-2">
+                    <span>AJOUTER (+20€)</span>
+                    <span class="text-lg">🔥</span>
+                </button>
+                <button onclick="closeUpsell()" class="w-full py-2 text-[10px] text-gray-500 font-bold uppercase mt-2 hover:text-white transition-colors">Non merci, je refuse l'offre</button>
             </div>
         </div>
     </div>
@@ -273,7 +310,6 @@
             <div class="absolute top-0 right-0 p-4">
                 <button onclick="closePromo()" class="text-gray-500 hover:text-white">✕</button>
             </div>
-            
             <div class="text-center mb-6">
                 <div class="w-16 h-16 bg-[--accent-dim] rounded-full flex items-center justify-center mx-auto mb-4 border border-[--accent]/30">
                     <span class="text-3xl">🎁</span>
@@ -281,12 +317,10 @@
                 <h2 class="text-xl font-black text-white uppercase brand-font mb-2">CERCLE PRIVÉ</h2>
                 <div class="h-0.5 w-12 bg-[--accent] mx-auto rounded-full"></div>
             </div>
-
             <div class="space-y-4 text-center">
                 <p class="text-sm text-gray-300 leading-relaxed">
                     Invitez un ami à rejoindre le QG. Dès sa première commande validée, vous recevez :
                 </p>
-                
                 <div class="bg-black/40 border border-[#333] p-4 rounded-xl space-y-2">
                     <p class="text-white font-bold text-sm flex items-center justify-center gap-2">
                         <span class="text-[--accent]">💍</span> 10€ à 20€ de REMISE
@@ -296,16 +330,41 @@
                         <span class="text-[--accent]">🌿</span> 1G à 2G OFFERTS
                     </p>
                 </div>
-
                 <p class="text-[10px] text-gray-500 italic">Offre valable pour tout nouveau client parrainé qui consomme.</p>
-                
                 <button onclick="copyPromo()" class="btn-main w-full py-3 text-xs tracking-widest mt-2">COPIER MON CODE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ₿ CRYPTO GUIDE MODAL -->
+    <div id="crypto-modal" class="fixed inset-0 z-[70] bg-black/95 hidden flex items-center justify-center backdrop-blur-md p-4">
+        <div class="bg-[#151515] border border-blue-500/50 w-full max-w-sm rounded-2xl p-6 relative overflow-hidden shadow-[0_0_30px_rgba(59,130,246,0.1)]">
+            <div class="absolute top-0 right-0 p-4">
+                <button onclick="document.getElementById('crypto-modal').classList.add('hidden')" class="text-gray-500 hover:text-white">✕</button>
+            </div>
+            <h2 class="text-xl font-black text-white uppercase brand-font mb-4 text-center">Paiement 30 Sec ⚡</h2>
+            <div class="space-y-4">
+                <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">1</div>
+                    <p class="text-xs text-gray-300">Téléchargez une app fiable comme <span class="text-white font-bold">MoonPay, Exodus ou Binance</span>.</p>
+                </div>
+                <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">2</div>
+                    <p class="text-xs text-gray-300">Achetez du <span class="text-white font-bold">LTC (Litecoin)</span> ou BTC avec votre Carte Bancaire. C'est instantané.</p>
+                </div>
+                <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">3</div>
+                    <p class="text-xs text-gray-300">Envoyez le montant exact à l'adresse que nous fournissons lors de la validation.</p>
+                </div>
+                <div class="bg-blue-500/10 p-3 rounded border border-blue-500/20 text-center">
+                    <p class="text-[10px] text-blue-300 font-bold uppercase">🔐 Zéro mention sur votre relevé bancaire. 100% Safe.</p>
+                </div>
             </div>
         </div>
     </div>
     
     <!-- Custom Modal for Errors/Messages -->
-    <div id="ui-message-modal" class="fixed inset-0 z-[80] bg-black/80 hidden flex items-center justify-center p-4">
+    <div id="ui-message-modal" class="fixed inset-0 z-[90] bg-black/80 hidden flex items-center justify-center p-4">
         <div class="titanium-card p-6 w-full max-w-xs text-center border-l-4 border-l-red-500">
             <h3 id="ui-message-title" class="text-lg font-black brand-font mb-2 text-red-400">Erreur</h3>
             <p id="ui-message-body" class="text-sm text-gray-300 mb-4"></p>
@@ -315,10 +374,6 @@
 </div>
 
 <script>
-    // ==========================================
-    // 1. GHOST PROTOCOL (TWA GATEKEEPER)
-    // ==========================================
-
     const CONFIG = { ADMIN: "33759840764", CURRENCY: "€", MAINTENANCE: false };
     const _d = s => { try { return decodeURIComponent(escape(atob(s))); } catch { return s; } };
 
@@ -327,6 +382,8 @@
     let favorites = JSON.parse(localStorage.getItem('sv_favs') || '[]');
     let currentModalId = null;
     let carouselInterval = null;
+    let bannerInterval = null;
+    let upsellShown = false; // Trigger control
 
     // --- UTILS UI ---
     function showUIMessage(title, body) {
@@ -337,9 +394,7 @@
     }
 
     function handleVideoError(videoElement) {
-        // If video fails (and it's supposed to be a video), show placeholder
         if(!videoElement.classList.contains('hidden')) {
-             console.error("Erreur vid\u00e9o");
              videoElement.style.display = 'none';
         }
     }
@@ -351,18 +406,11 @@
             return; 
         }
         
-        // 🚨 NOUVEAU: TWA GATEKEEPER
-        // Pour le mode développement en Web (hors Telegram), on bypass le check si pas de WebApp
         const isTWA = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData;
         const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
         
-        // Note: En prod, retirer "|| true" pour activer le gatekeeper
         if (!isTWA && !isDev && !document.referrer) {
-            // console.log("❌ Gatekeeper: Acc\u00e8s non TWA d\u00e9tect\u00e9.");
-            // document.getElementById('intro-layer').style.display = 'none'; 
-            // document.getElementById('access-denied-screen').classList.remove('hidden'); 
-            // document.getElementById('app-container').classList.add('hidden');
-            // return;
+            // Gatekeeper logic here
         }
 
         console.log("✅ Gatekeeper: Acc\u00e8s autoris\u00e9.");
@@ -372,7 +420,6 @@
         setInterval(checkStatus, 60000); 
         setInterval(updateTicker, 60000); 
 
-        // Intro Sequence
         setTimeout(() => {
             document.getElementById('intro-layer').style.transition = 'opacity 0.8s ease';
             document.getElementById('intro-layer').style.opacity = '0';
@@ -388,25 +435,18 @@
         if(window.Telegram?.WebApp) window.Telegram.WebApp.expand();
     };
 
-    // --- TICKER LOGIC (SAFE) ---
+    // --- TICKER ---
     async function updateTicker() {
         const el = document.getElementById('live-ticker');
-        
-        // Messages avec Emojis encodés en JS Unicode pour éviter tout bug d'affichage
-        // "ARRIVAGE PREMIUM EN COURS..."
         const msg1 = '<span class="ticker-item"><span class="ticker-icon">📦</span> ARRIVAGE PREMIUM EN COURS...</span>';
-        // "-10% SUR LES ENVOIS POSTAL !"
         const msg2 = '<span class="ticker-item"><span class="ticker-icon">📫</span> -10% SUR LES ENVOIS POSTAL !</span>';
-        // "1 AMI VALIDÉ = 1G OFFERT"
         const msg3 = '<span class="ticker-item"><span class="ticker-icon">🎁</span> 1 AMI VALIDÉ = 1G OFFERT</span>';
-
         const comms = [msg1, msg2, msg3];
         
         let cryptoHtml = '';
         try {
             const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=eur&include_24hr_change=true');
             const data = await res.json();
-            
             const formatCoin = (coin, name) => {
                 const price = data[coin].eur;
                 const change = data[coin].eur_24h_change;
@@ -414,22 +454,16 @@
                 const color = change >= 0 ? 'ticker-up' : 'ticker-down';
                 return `<span class="ticker-item">${name}: <span class="ticker-val">${Math.floor(price)}${CONFIG.CURRENCY}</span> <span class="${color} text-[8px]">${arrow} ${Math.abs(change).toFixed(1)}%</span></span>`;
             };
-
             cryptoHtml = formatCoin('bitcoin', 'BTC') + formatCoin('ethereum', 'ETH') + formatCoin('tether', 'USDT');
         } catch (e) {
-            console.warn("Erreur API CoinGecko. Utilisation de la communication statique.");
             cryptoHtml = '<span class="ticker-item">BTC/ETH/USDT ACCEPTÉS</span>';
         }
-
-        const content = comms.join('') + cryptoHtml;
-        el.innerHTML = content + content; 
+        el.innerHTML = (comms.join('') + cryptoHtml).repeat(2); 
     }
 
-    // --- CHECK SHOP STATUS ---
     function checkStatus() {
         const now = new Date();
         const h = now.getHours();
-        // Ouvert de 10h à 3h du matin (non inclus)
         const isOpen = (h >= 10 && h < 24) || (h >= 0 && h < 3); 
         const dot = document.getElementById('status-dot');
         const text = document.getElementById('status-text');
@@ -449,7 +483,23 @@
     const TIERS_WIZARD = [{w:'5G (1/2)',p:80},{w:'10G (1)',p:170}];
 
     const CATALOG = [
-        // --- ZAZA VALLEY / WIZARD TREEZ (FROZEN) -> MOVED TO SUNNY VALLEY ---
+        // 1. 🔥 OFFRES SPÉCIALES (VALUE LADDER L1 & L3)
+        {
+            id: 'TEST-PACK', name: "Tester Pack - Initiation", category: "🔥 OFFRES SPÉCIALES", icon: '🧪',
+            desc: "Le Kit d'Initiation. Vous doutez ? Testez.\n\nContient :\n- 2.5G Mousseux (Au Choix)\n- 2G Pink Kush USA TopShelf\n\n50€ pour comprendre pourquoi on est les Rois du 92.", tag: "BEST DEAL",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov", // Pink Kush video as placeholder
+            tiers: [{w:'Pack Découverte', p:50}],
+            variants: ["Mousseux Simpsons", "Mousseux Xale"]
+        },
+        {
+            id: 'SOUTH-BOX', name: "South Box 50G - Mix", category: "🔥 OFFRES SPÉCIALES", icon: '📦',
+            desc: "Le Stock Stratégique. 50G de pure Sunny Valley.\n\nMix Optimisé de nos meilleures références Sunny (Hors Wizard).\nParfait pour la rentabilité ou la consommation longue durée.\n\nChoisissez votre dominante :", tag: "BULK",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4", // Mousseux video as placeholder
+            tiers: [{w:'50G Box', p:280}],
+            variants: ["Dominante Pink Kush", "Dominante Mousseux", "Mix Équilibré 50/50"]
+        },
+
+        // 2. SUNNY VALLEY (AVEC WIZARD TREEZ)
         {
             id: 'WZ-ALL', name: "Olives Wizard Treez - Frozen Sift 🧊🧙‍♀️", category: _d('U3VubnkgVmFsbGV5'), icon: '🧙‍♀️',
             desc: "🇺🇸 CALI CONNECTION EXCLUSIVE 🇺🇸\n\nLE TERROIR WIZARD TREEZ DÉBARQUE !\n\n5 STRAINS LÉGENDAIRES RÉUNIES :\n🍌 Honey Banana\n👑 DREAM Queen\n🍇 Forbidden Fruits\n🍏 Apple GELATO\n🍩 OG DONUTZ\n\n🧊 FROZEN SIFT PREMIUM\n🌡️ COLD CURED STORAGE\n🍬 TERPS EXPLOSIFS\n\n⚠️ STOCK ULTRA LIMITÉ - PREMIER ARRIVÉ PREMIER SERVI !", tag: "WIZARD TREEZ",
@@ -462,34 +512,34 @@
                 "https://res.cloudinary.com/dlmmylat6/image/upload/v1765993834/IMG_2072_ppyr6d.jpg"
             ],
             tiers: TIERS_WIZARD,
-            // ✨ NOUVEAU: Liste des variétés pour le sélecteur
-            variants: ["Honey Banana", "DREAM Queen", "Forbidden Fruits", "Apple GELATO", "OG DONUTZ"]
+            variants: ["Honey Banana", "DREAM Queen", "Forbidden Fruits", "Apple GELATO", "OG DONUTZ"],
+            logo: "https://res.cloudinary.com/dlmmylat6/image/upload/v1766008859/IMG_2087_vgvu2p.png"
         },
-        
-        // --- ANCIEN CATALOGUE ---
+        {
+            id: 'PK', name: _d('UGluayBLdXNo'), category: _d('U3VubnkgVmFsbGV5'), icon: '🧬', 
+            desc: "Import Cali 🇺🇸. Taux THC 34%. Terpènes explosifs. La référence Top Shelf.", tag: "TOP SHELF",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov",
+            tiers: [{w:'5G',p:60},{w:'10G',p:120},{w:'25G',p:220},{w:'50G',p:360},{w:'100G',p:640},{w:'500G',p:2900}]
+        },
+        {
+            id: 'SM', name: _d('U2ltcHNvbnMgTW91c3Nl'), category: _d('U3VubnkgVmFsbGV5'), icon: '🧽', 
+            desc: "La référence Mousseux 2025. Texture parfaite. Rapport Qualité/Prix imbattable.", tag: "REF 2025",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4",
+            tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:170},{w:'100G',p:350}]
+        },
+        {
+            id: 'XM', name: _d('WGFsZSBNb3Vzc2U='), category: _d('U3VubnkgVmFsbGV5'), icon: '🧽', 
+            desc: "Top jaune mousseux. Classique efficace.", tag: "LIMITÉ",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906313/IMG_1819_i4ipsf.mp4",
+            tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:160},{w:'100G',p:340}]
+        },
+
+        // 3. SNOW VALLEY
         {
             id: 'MC', name: _d('TU9OVMOJIENSSVNUTw=='), category: _d('U25vdyBWYWxsZXk='), icon: '❄️',
             desc: "Origine Bolivie 🇧🇴. Pureté exceptionnelle (0.98%). Une expérience givrée unique.", tag: "DIAMOND",
             video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906305/IMG_1629_ntkjra.mp4",
             tiers: [{w:'1G',p:60},{w:'2G',p:120},{w:'3G',p:160},{w:'5G',p:260},{w:'10G',p:400},{w:'50G',p:1500},{w:'100G',p:2800}]
-        },
-        {
-            id: 'PK', name: _d('UGluayBLdXNo'), category: _d('U3VubnkgVmFsbGV5'), icon: '🧬', 
-            desc: "Import Cali 🇺🇸. Taux THC 34%. Terpènes explosifs.", tag: "TOP SHELF",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov",
-            tiers: [{w:'5G',p:60},{w:'10G',p:120},{w:'25G',p:220},{w:'50G',p:360},{w:'100G',p:640},{w:'500G',p:2900}]
-        },
-        {
-            id: 'SM', name: _d('U2ltcHNvbnMgTW91c3Nl'), category: _d('U3VubnkgVmFsbGV5'), icon: '🧽', // Sponge
-            desc: "La référence Mousseux 2025. Texture parfaite.", tag: "REF 2025",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4",
-            tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:170},{w:'100G',p:350}]
-        },
-        {
-            id: 'XM', name: _d('WGFsZSBNb3Vzc2U='), category: _d('U3VubnkgVmFsbGV5'), icon: '🧽', // Sponge
-            desc: "Top jaune mousseux. Rapport qualité/prix imbattable.", tag: "LIMITÉ",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906313/IMG_1819_i4ipsf.mp4",
-            tiers: [{w:'10G',p:60},{w:'20G',p:100},{w:'50G',p:160},{w:'100G',p:340}]
         }
     ];
 
@@ -504,6 +554,7 @@
     // --- ROUTER ---
     function router(view, data) {
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+        if(bannerInterval) clearInterval(bannerInterval);
         const main = document.getElementById('main-view');
         main.scrollTop = 0;
         
@@ -525,31 +576,48 @@
 
     // --- VIEWS ---
     function renderMenu(c) {
-        const banner = `
-            <div class="relative h-48 rounded-2xl overflow-hidden border border-[#222] shadow-2xl mb-6 fade-in cursor-pointer active:scale-[0.98] transition-all duration-300 group" onclick="openPromo()">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#121212] via-[#050505] to-[#0a0a0a]"></div>
-                <div class="absolute -top-12 -right-12 w-48 h-48 bg-[--accent] opacity-[0.08] blur-[60px] rounded-full group-hover:opacity-[0.15] transition-opacity duration-700"></div>
-                <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[--accent]/5 to-transparent opacity-50"></div>
-                <div class="absolute inset-0 z-20 flex flex-col justify-center px-8">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-[9px] bg-[--accent] text-black font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(245,158,11,0.2)] tracking-widest uppercase">Offre Noël</span>
-                        <span class="text-[10px] animate-pulse">🎁</span>
+        // Banner Logic
+        const bannerHtml = `
+            <div id="home-banner" class="relative h-48 rounded-2xl overflow-hidden border border-[#222] shadow-2xl mb-6 fade-in cursor-pointer active:scale-[0.98] transition-all duration-300 group">
+                <div id="banner-track" class="absolute inset-0 flex h-full transition-transform duration-700 ease-in-out" style="width: 200%;">
+                    <div class="w-1/2 h-full relative shrink-0" onclick="openPromo()">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#121212] via-[#050505] to-[#0a0a0a]"></div>
+                        <div class="absolute -top-12 -right-12 w-48 h-48 bg-[--accent] opacity-[0.08] blur-[60px] rounded-full group-hover:opacity-[0.15] transition-opacity duration-700"></div>
+                        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[--accent]/5 to-transparent opacity-50"></div>
+                        <div class="absolute inset-0 z-20 flex flex-col justify-center px-8">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-[9px] bg-[--accent] text-black font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(245,158,11,0.2)] tracking-widest uppercase">Offre Noël</span>
+                                <span class="text-[10px] animate-pulse">🎁</span>
+                            </div>
+                            <h2 class="text-3xl font-black text-white uppercase brand-font leading-none tracking-tight mb-4">South <span class="text-transparent bg-clip-text bg-gradient-to-r from-[--accent] to-[#ffeeb0]">Valley</span></h2>
+                            <div class="flex items-center gap-3 border-l-2 border-[#333] pl-3 group-hover:border-[--accent] transition-colors duration-500">
+                                <p class="text-[10px] text-gray-400 font-medium leading-relaxed uppercase tracking-wide">Parrainage Exclusif <br><span class="text-white font-bold text-xs">1 Ami Validé = 1G Offert</span></p>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="text-3xl font-black text-white uppercase brand-font leading-none tracking-tight mb-4">
-                        South <span class="text-transparent bg-clip-text bg-gradient-to-r from-[--accent] to-[#ffeeb0]">Valley</span>
-                    </h2>
-                    <div class="flex items-center gap-3 border-l-2 border-[#333] pl-3 group-hover:border-[--accent] transition-colors duration-500">
-                        <p class="text-[10px] text-gray-400 font-medium leading-relaxed uppercase tracking-wide">
-                            Parrainage Exclusif <br>
-                            <span class="text-white font-bold text-xs">1 Ami Validé = 1G Offert</span>
-                        </p>
+                    <div class="w-1/2 h-full relative shrink-0" onclick="router('products', _d('U3VubnkgVmFsbGV5'))">
+                        <div class="absolute inset-0 bg-black"><img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765993841/IMG_2073_ffmyfd.jpg" class="w-full h-full object-cover opacity-40 blur-sm scale-110"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
+                        <div class="absolute inset-0 z-20 flex flex-col justify-center px-8">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2"><span class="text-[9px] bg-purple-600 text-white font-black px-2.5 py-1 rounded shadow-[0_0_15px_rgba(147,51,234,0.4)] tracking-widest uppercase animate-pulse">NOUVEAU DROP</span></div>
+                                <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1766008859/IMG_2087_vgvu2p.png" class="h-8 w-auto rounded-full border border-white/20" alt="WT Logo">
+                            </div>
+                            <h2 class="text-2xl font-black text-white uppercase brand-font leading-none tracking-tight mb-2">WIZARD <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">TREEZ</span></h2>
+                            <p class="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-4">Frozen Sift • 🧊 • Cali Exclusive</p>
+                            <div class="flex items-center gap-3"><span class="text-[10px] bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded font-bold uppercase backdrop-blur-md">Voir le Menu →</span></div>
+                        </div>
                     </div>
                 </div>
-                <div class="absolute -right-6 top-1/2 -translate-y-1/2 text-9xl opacity-[0.03] group-hover:opacity-[0.07] group-hover:scale-110 transition-all duration-700 select-none">❄️</div>
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[--accent] transition-all duration-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]" id="ban-dot-0"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#333] transition-all duration-300" id="ban-dot-1"></div>
+                </div>
             </div>
         `;
 
         const cats = [
+            { name: "🔥 OFFRES SPÉCIALES", sub: "TESTER PACKS & BOX EN GROS", icon: "💎" },
             { name: _d('U3VubnkgVmFsbGV5'), sub: "CALI CONNECT • TOP SHELF • EXOTIC", icon: "☀️" },
             { name: _d('U25vdyBWYWxsZXk='), sub: "Festivité - Expérience givrée garantie", icon: "❄️" }
         ];
@@ -574,63 +642,70 @@
             <div class="mt-8 mb-6 fade-in" style="animation-delay: 200ms">
                 <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 ml-1">Confiance Client</h3>
                 <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x">
-                    ${REVIEWS.map(r => `
-                        <div class="titanium-card p-3 min-w-[220px] snap-center border-l-2 border-l-[--accent]">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] font-bold text-white">${r.name}</span>
-                                <span class="text-[8px] text-[--accent]">⭐⭐⭐⭐⭐</span>
-                            </div>
-                            <p class="text-[10px] text-gray-400 italic leading-tight">"${r.txt}"</p>
-                        </div>
-                    `).join('')}
+                    ${REVIEWS.map(r => `<div class="titanium-card p-3 min-w-[220px] snap-center border-l-2 border-l-[--accent]"><div class="flex justify-between items-center mb-1"><span class="text-[10px] font-bold text-white">${r.name}</span><span class="text-[8px] text-[--accent]">⭐⭐⭐⭐⭐</span></div><p class="text-[10px] text-gray-400 italic leading-tight">"${r.txt}"</p></div>`).join('')}
                 </div>
             </div>
         `;
 
-        c.innerHTML = banner + catsHtml + reviewsHtml;
+        c.innerHTML = bannerHtml + catsHtml + reviewsHtml;
+
+        let currentSlide = 0;
+        const track = document.getElementById('banner-track');
+        const dot0 = document.getElementById('ban-dot-0');
+        const dot1 = document.getElementById('ban-dot-1');
+
+        bannerInterval = setInterval(() => {
+            currentSlide = currentSlide === 0 ? 1 : 0;
+            if(track) {
+                track.style.transform = `translateX(-${currentSlide * 50}%)`;
+                if(currentSlide === 0) {
+                    dot0.className = "w-1.5 h-1.5 rounded-full bg-[--accent] transition-all duration-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]";
+                    dot1.className = "w-1.5 h-1.5 rounded-full bg-[#333] transition-all duration-300";
+                } else {
+                    dot0.className = "w-1.5 h-1.5 rounded-full bg-[#333] transition-all duration-300";
+                    dot1.className = "w-1.5 h-1.5 rounded-full bg-[--accent] transition-all duration-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]";
+                }
+            }
+        }, 4000);
     }
 
     function renderInfos(c) {
         c.innerHTML = `
             <h2 class="text-2xl font-black text-white uppercase brand-font mb-6 fade-in">Logistique</h2>
             
+            <div class="grid grid-cols-2 gap-3 mb-6 fade-in">
+                <a href="https://t.me/+06onB0NQB345MGRk" class="titanium-card p-4 flex flex-col items-center justify-center text-center gap-2 border border-green-500/30 bg-green-500/5 active:scale-95 transition-transform">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <p class="text-[10px] font-bold text-green-400 uppercase">Legit Check</p>
+                        <p class="text-[8px] text-gray-500">Voir les preuves & retours</p>
+                    </div>
+                </a>
+                <button onclick="document.getElementById('crypto-modal').classList.remove('hidden')" class="titanium-card p-4 flex flex-col items-center justify-center text-center gap-2 border border-blue-500/30 bg-blue-500/5 active:scale-95 transition-transform">
+                    <span class="text-2xl">⚡</span>
+                    <div>
+                        <p class="text-[10px] font-bold text-blue-400 uppercase">Tuto Crypto</p>
+                        <p class="text-[8px] text-gray-500">Payer en 30 secondes</p>
+                    </div>
+                </button>
+            </div>
+
             <div class="titanium-card p-5 mb-6 fade-in border-t border-[--accent]/30 bg-gradient-to-b from-[--accent-dim] to-transparent">
                 <div class="flex items-center gap-3 mb-4">
                     <span class="text-2xl">👑</span>
                     <h3 class="font-black text-white uppercase brand-font text-lg">CERCLE D'INFLUENCE</h3>
                 </div>
-                
                 <div class="space-y-3">
                     <div class="flex items-center justify-between p-2 rounded bg-black/40 border border-white/5">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">1</div>
-                            <div>
-                                <p class="text-[10px] font-bold text-white uppercase">ASSOCIÉ</p>
-                                <p class="text-[9px] text-gray-500">1 Ami Validé</p>
-                            </div>
-                        </div>
+                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">1</div><div><p class="text-[10px] font-bold text-white uppercase">ASSOCIÉ</p><p class="text-[9px] text-gray-500">1 Ami Validé</p></div></div>
                         <span class="text-[9px] font-bold text-[--accent] border border-[--accent] px-2 py-0.5 rounded">1G OFFERT</span>
                     </div>
-
                     <div class="flex items-center justify-between p-2 rounded bg-black/40 border border-white/5 opacity-80">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">3</div>
-                            <div>
-                                <p class="text-[10px] font-bold text-white uppercase">INITIÉ</p>
-                                <p class="text-[9px] text-gray-500">3 Amis Validés</p>
-                            </div>
-                        </div>
+                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">3</div><div><p class="text-[10px] font-bold text-white uppercase">INITIÉ</p><p class="text-[9px] text-gray-500">3 Amis Validés</p></div></div>
                         <span class="text-[9px] font-bold text-gray-300 border border-gray-600 px-2 py-0.5 rounded">5G + PRIO</span>
                     </div>
-
                     <div class="flex items-center justify-between p-2 rounded bg-black/40 border border-white/5 opacity-60">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">5</div>
-                            <div>
-                                <p class="text-[10px] font-bold text-white uppercase">VIP</p>
-                                <p class="text-[9px] text-gray-500">5 Amis Validés</p>
-                            </div>
-                        </div>
+                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">5</div><div><p class="text-[10px] font-bold text-white uppercase">VIP</p><p class="text-[9px] text-gray-500">5 Amis Validés</p></div></div>
                         <span class="text-[9px] font-bold text-gray-300 border border-gray-600 px-2 py-0.5 rounded">10G + SECRET</span>
                     </div>
                 </div>
@@ -638,56 +713,23 @@
         `;
         
         const infos = [
-            { title: "MEET-UP", icon: "🤝", badge: "92 / IDF", desc: "Rencontre rapide et sécurisée sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Accès facile via transports.", details: [
-                {k:"MINIMUM", v:`50${CONFIG.CURRENCY}`}, {k:"HORAIRES", v:"10:30 - 02:00"}, {k:"SÉCURITÉ", v:"Lieux discrets"}
-            ]},
-            { title: "LIVRAISON", icon: "🚚", badge: "PREMIUM", desc: "Service de livraison premium en Île-de-France par nos chauffeurs privés. Remise en main propre à l'adresse de votre choix.", details: [
-                {k:"IDF PROCHE", v:`Min 60${CONFIG.CURRENCY}`}, 
-                {k:"LIMITROPHE", v:`Min 200${CONFIG.CURRENCY} (28/45/60...)}`}, 
-                {k:"COMMANDE", v:"24/24"},
-                {k:"LIVRAISON", v:"12:00 - 03:00"}
-            ]},
-            { title: "POSTAL", icon: "📦", badge: "EUROPE", desc: "Expédition furtive à travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypté. La référence de l'envoi.", details: [
-                {k:"PAIEMENT", v:"BTC/LTC/ETH/USDT"}, 
-                {k:"PACKAGING", v:"Double Scellé"}, 
-                {k:"SUIVI", v:"Tracking Chiffré"}
-            ]}
+            { title: "MEET-UP", icon: "🤝", badge: "92 / IDF", desc: "Rencontre rapide et sécurisée sur nos points de retrait exclusifs dans le 92 (Ligne 13, RER C, L). Accès facile via transports.", details: [{k:"MINIMUM", v:`50${CONFIG.CURRENCY}`}, {k:"HORAIRES", v:"10:30 - 02:00"}, {k:"SÉCURITÉ", v:"Lieux discrets"}]},
+            { title: "LIVRAISON", icon: "🚚", badge: "PREMIUM", desc: "Service de livraison premium en Île-de-France par nos chauffeurs privés. Remise en main propre à l'adresse de votre choix.", details: [{k:"IDF PROCHE", v:`Min 60${CONFIG.CURRENCY}`}, {k:"LIMITROPHE", v:`Min 200${CONFIG.CURRENCY} (28/45/60...)}`}, {k:"COMMANDE", v:"24/24"},{k:"LIVRAISON", v:"12:00 - 03:00"}]},
+            { title: "POSTAL", icon: "📦", badge: "EUROPE", desc: "Expédition furtive à travers l'Europe. Double emballage sous vide, aucune odeur, suivi crypté. La référence de l'envoi.", details: [{k:"PAIEMENT", v:"BTC/LTC/ETH/USDT"}, {k:"PACKAGING", v:"Double Scellé"}, {k:"SUIVI", v:"Tracking Chiffré"}]}
         ];
 
         infos.forEach((info, i) => {
-            const rows = info.details.map(d => `
-                <div class="flex justify-between py-2 border-b border-[--border] last:border-0">
-                    <span class="text-[10px] font-bold text-gray-500">${d.k}</span>
-                    <span class="text-[10px] font-bold text-white text-right">${d.v}</span>
-                </div>
-            `).join('');
-
+            const rows = info.details.map(d => `<div class="flex justify-between py-2 border-b border-[--border] last:border-0"><span class="text-[10px] font-bold text-gray-500">${d.k}</span><span class="text-[10px] font-bold text-white text-right">${d.v}</span></div>`).join('');
             const el = document.createElement('div');
             el.className = "titanium-card p-5 mb-4 fade-in";
             el.style.animationDelay = `${i*100}ms`;
-            el.innerHTML = `
-                <div class="flex justify-between items-center mb-2">
-                    <div class="flex items-center gap-2">
-                        <span class="text-xl">${info.icon}</span>
-                        <h3 class="font-black text-white uppercase brand-font">${info.title}</h3>
-                    </div>
-                    <span class="text-[9px] font-bold bg-[#222] text-[--accent] px-2 py-1 rounded border border-[--border]">${info.badge}</span>
-                </div>
-                <p class="text-[10px] text-gray-400 mb-4 leading-relaxed">${info.desc}</p>
-                <div class="bg-black/30 rounded-lg p-3 border border-[--border] space-y-1">
-                    ${rows}
-                </div>
-            `;
+            el.innerHTML = `<div class="flex justify-between items-center mb-2"><div class="flex items-center gap-2"><span class="text-xl">${info.icon}</span><h3 class="font-black text-white uppercase brand-font">${info.title}</h3></div><span class="text-[9px] font-bold bg-[#222] text-[--accent] px-2 py-1 rounded border border-[--border]">${info.badge}</span></div><p class="text-[10px] text-gray-400 mb-4 leading-relaxed">${info.desc}</p><div class="bg-black/30 rounded-lg p-3 border border-[--border] space-y-1">${rows}</div>`;
             c.appendChild(el);
         });
 
         const support = document.createElement('div');
         support.className = "titanium-card p-4 mt-6 fade-in border-l-4 border-l-blue-500 text-center";
-        support.innerHTML = `
-            <h4 class="text-xs font-bold text-white uppercase mb-1">Besoin d'aide ?</h4>
-            <p class="text-[10px] text-gray-400 mb-3">Notre support est disponible pour vous assister.</p>
-            <a href="https://wa.me/${CONFIG.ADMIN}" class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded border border-blue-500/20 font-bold uppercase">Contacter le Support</a>
-        `;
+        support.innerHTML = `<h4 class="text-xs font-bold text-white uppercase mb-1">Besoin d'aide ?</h4><p class="text-[10px] text-gray-400 mb-3">Notre support est disponible pour vous assister.</p><a href="https://wa.me/${CONFIG.ADMIN}" class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded border border-blue-500/20 font-bold uppercase">Contacter le Support</a>`;
         c.appendChild(support);
     }
 
@@ -696,6 +738,7 @@
         let introText = "";
         if(category.includes("Sunny")) introText = "💎 SÉLECTION EXCLUSIVE CALIFORNIA. Direct from Farms. Terpènes validés, génétiques rares et connexions officielles. Le soleil en pochon.";
         else if(category.includes("Snow")) introText = "❄️ Menu Festif - Exclusivités givrées & pureté garantie ! Sélection premium & validée ! 🥳";
+        else if(category.includes("OFFRES")) introText = "🎁 LE COIN DES HUSTLERS. Packs découvertes et Offres en Gros. C'est ici que les vraies affaires se font. Stock limité.";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -712,11 +755,7 @@
             el.style.animationDelay = `${i*50}ms`;
             el.onclick = () => openModal(p);
             el.innerHTML = `
-                <!-- ❤️ HEART ON CARD -->
-                <div onclick="event.stopPropagation(); toggleListFav('${p.id}', this)" class="absolute top-2 right-2 z-10 p-2 text-lg drop-shadow-md transition-transform active:scale-125">
-                    ${isFav ? '❤️' : '🤍'}
-                </div>
-
+                <div onclick="event.stopPropagation(); toggleListFav('${p.id}', this)" class="absolute top-2 right-2 z-10 p-2 text-lg drop-shadow-md transition-transform active:scale-125">${isFav ? '❤️' : '🤍'}</div>
                 <div class="w-20 h-20 bg-black rounded-lg border border-[--border] shrink-0 flex items-center justify-center text-3xl relative overflow-hidden">
                     <span class="z-10">${p.icon}</span>
                     ${p.tag ? `<div class="absolute bottom-0 w-full bg-[--accent] text-black text-[7px] font-bold text-center uppercase py-0.5 z-20">${p.tag}</div>` : ''}
@@ -776,12 +815,7 @@
         c.innerHTML = `
             <button onclick="router('cart')" class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-6">← Retour</button>
             <h2 class="text-2xl font-black text-white uppercase brand-font mb-6">Validation</h2>
-            
-            <div class="bg-red-500/10 border border-red-500/20 p-3 rounded-lg mb-6 flex gap-3 items-start fade-in">
-                <span class="text-lg">⚠️</span>
-                <p class="text-[10px] text-red-300 leading-relaxed"><span class="font-bold text-white">Nouveau client ?</span> Préparez une photo CNI + Selfie pour la vérification WhatsApp.</p>
-            </div>
-
+            <div class="bg-red-500/10 border border-red-500/20 p-3 rounded-lg mb-6 flex gap-3 items-start fade-in"><span class="text-lg">⚠️</span><p class="text-[10px] text-red-300 leading-relaxed"><span class="font-bold text-white">Nouveau client ?</span> Préparez une photo CNI + Selfie pour la vérification WhatsApp.</p></div>
             <div class="space-y-6 fade-in">
                 <div class="titanium-card p-4">
                     <label class="text-[10px] font-bold text-gray-500 uppercase block mb-3">Service</label>
@@ -792,22 +826,13 @@
                     </div>
                     <input type="hidden" id="in-srv">
                 </div>
-
                 <div class="titanium-card p-4 space-y-3">
                     <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Coordonnées</label>
                     <input id="in-name" type="text" placeholder="NOM / PSEUDO" class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
                     <input id="in-wa" type="text" placeholder="WHATSAPP (OBLIGATOIRE)" class="w-full bg-black border border-[--border] border-l-2 border-l-[--accent] text-white text-xs p-3 rounded focus:border-white outline-none">
-                    
-                    <div id="address-container">
-                        <input id="in-addr" type="text" placeholder="ADRESSE / LIEU" class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
-                    </div>
-
-                    <div id="time-container">
-                        <label id="time-label" class="text-[9px] font-bold text-gray-500 uppercase block mt-2 mb-1">Préférence Horaire</label>
-                        <input id="in-time" type="text" placeholder="Heure souhaitée..." class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none">
-                    </div>
+                    <div id="address-container"><input id="in-addr" type="text" placeholder="ADRESSE / LIEU" class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none"></div>
+                    <div id="time-container"><label id="time-label" class="text-[9px] font-bold text-gray-500 uppercase block mt-2 mb-1">Préférence Horaire</label><input id="in-time" type="text" placeholder="Heure souhaitée..." class="w-full bg-black border border-[--border] text-white text-xs p-3 rounded focus:border-[--accent] outline-none"></div>
                 </div>
-
                 <div class="titanium-card p-4">
                     <label class="text-[10px] font-bold text-gray-500 uppercase block mb-3">Paiement</label>
                     <div class="grid grid-cols-2 gap-2">
@@ -816,7 +841,6 @@
                     </div>
                     <input type="hidden" id="in-pay">
                 </div>
-
                 <button onclick="submitOrder()" class="btn-main w-full py-4 text-xs tracking-widest mt-4">ENVOYER L'ORDRE (${total}${CONFIG.CURRENCY})</button>
             </div>
         `;
@@ -827,15 +851,11 @@
             <div class="h-[60vh] flex flex-col items-center justify-center text-center fade-in">
                 <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-2xl mb-6 shadow-[0_0_20px_rgba(16,185,129,0.2)]">✅</div>
                 <h2 class="text-xl font-black text-white uppercase brand-font mb-2">ORDRE TRANSMIS</h2>
-                
                 <div class="titanium-card p-4 w-full max-w-xs mb-6 mt-6 border-l-4 border-l-[--accent]">
                     <p class="text-[9px] text-gray-500 uppercase font-bold mb-1">Code Unique</p>
                     <p class="text-2xl font-mono font-bold text-white tracking-widest">${code}</p>
                 </div>
-                
-                <a href="https://wa.me/${CONFIG.ADMIN}" class="bg-[#25D366] text-black font-bold py-3 px-8 rounded-lg text-xs uppercase tracking-widest shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">
-                    Ouvrir WhatsApp →
-                </a>
+                <a href="https://wa.me/${CONFIG.ADMIN}" class="bg-[#25D366] text-black font-bold py-3 px-8 rounded-lg text-xs uppercase tracking-widest shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">Ouvrir WhatsApp →</a>
             </div>
         `;
     }
@@ -845,47 +865,49 @@
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
         document.getElementById('promo-modal').classList.remove('hidden');
     }
-    
-    function closePromo() {
-        document.getElementById('promo-modal').classList.add('hidden');
-    }
-
+    function closePromo() { document.getElementById('promo-modal').classList.add('hidden'); }
     function copyPromo() {
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
         const btn = document.querySelector('#promo-modal button');
         btn.innerText = "COPIÉ !";
         btn.classList.add('bg-green-500', 'text-white');
-        setTimeout(() => {
-            btn.innerText = "COPIER MON CODE";
-            btn.classList.remove('bg-green-500', 'text-white');
-            closePromo();
-        }, 1500);
+        setTimeout(() => { btn.innerText = "COPIER MON CODE"; btn.classList.remove('bg-green-500', 'text-white'); closePromo(); }, 1500);
+    }
+
+    // --- UPSELL LOGIC ---
+    function checkUpsell(totalPrice) {
+        if (!upsellShown && totalPrice >= 80) {
+            document.getElementById('upsell-modal').classList.remove('hidden');
+            upsellShown = true;
+            if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
+            return true;
+        }
+        return false;
+    }
+    
+    function closeUpsell() {
+        document.getElementById('upsell-modal').classList.add('hidden');
+    }
+
+    function addUpsell() {
+        if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+        cart.push({name: "⚡ OFFRE FLASH: Cali Pink Kush", weight: "3G", price: 20});
+        closeUpsell();
+        updateDot();
+        router('cart');
     }
 
     // --- FAV LOGIC ---
     function toggleListFav(id, el) {
-        if(favorites.includes(id)) {
-            favorites = favorites.filter(fid => fid !== id);
-            el.innerText = '🤍';
-        } else {
-            favorites.push(id);
-            el.innerText = '❤️';
-            showConfetti(); 
-        }
+        if(favorites.includes(id)) { favorites = favorites.filter(fid => fid !== id); el.innerText = '🤍'; } 
+        else { favorites.push(id); el.innerText = '❤️'; showConfetti(); }
         localStorage.setItem('sv_favs', JSON.stringify(favorites));
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
     }
-
     function toggleModalFav() {
         const btn = document.getElementById('modal-fav-btn');
-        if(favorites.includes(currentModalId)) {
-            favorites = favorites.filter(fid => fid !== currentModalId);
-            btn.innerText = '🤍';
-        } else {
-            favorites.push(currentModalId);
-            btn.innerText = '❤️';
-            showConfetti();
-        }
+        if(favorites.includes(currentModalId)) { favorites = favorites.filter(fid => fid !== currentModalId); btn.innerText = '🤍'; } 
+        else { favorites.push(currentModalId); btn.innerText = '❤️'; showConfetti(); }
         localStorage.setItem('sv_favs', JSON.stringify(favorites));
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
     }
@@ -899,126 +921,84 @@
         
         document.getElementById('modal-title').innerText = p.name;
         document.getElementById('modal-tag').innerText = p.tag || 'STD';
-        // CORRECTION BUG AFFICHAGE DESCRIPTION (UTILISATION DE INNERHTML)
         document.getElementById('modal-desc').innerHTML = p.desc;
-        
         const favBtn = document.getElementById('modal-fav-btn');
         favBtn.innerText = favorites.includes(p.id) ? '❤️' : '🤍';
 
         const vid = document.getElementById('modal-video');
         const img = document.getElementById('modal-image');
+        const logo = document.getElementById('modal-brand-logo');
 
-        // Reset state
+        if (p.logo) { logo.src = p.logo; logo.classList.remove('hidden'); } else { logo.classList.add('hidden'); }
+
         clearInterval(carouselInterval);
 
-        // CHECK IF CAROUSEL MODE (Multiple Images)
         if (p.images && p.images.length > 1) {
-            vid.classList.add('hidden');
-            vid.pause();
-            img.classList.remove('hidden');
-            
-            let imgIdx = 0;
-            img.src = p.images[0];
-            
-            carouselInterval = setInterval(() => {
-                imgIdx = (imgIdx + 1) % p.images.length;
-                img.src = p.images[imgIdx];
-            }, 2500); // Change image every 2.5s
+            vid.classList.add('hidden'); vid.pause(); img.classList.remove('hidden');
+            let imgIdx = 0; img.src = p.images[0];
+            carouselInterval = setInterval(() => { imgIdx = (imgIdx + 1) % p.images.length; img.src = p.images[imgIdx]; }, 2500);
         } else {
-            // SINGLE MEDIA LOGIC
             const isVideo = p.video.endsWith('.mp4') || p.video.endsWith('.mov');
-
-            if(isVideo) {
-                img.classList.add('hidden');
-                vid.classList.remove('hidden');
-                vid.src = p.video; 
-                vid.load();
-                vid.play().catch(e => console.log("Vid\u00e9o n'a pas pu \u00eatre jou\u00e9e automatiquement:", e));
-            } else {
-                // It's an image
-                vid.classList.add('hidden');
-                vid.pause();
-                img.classList.remove('hidden');
-                img.src = p.video;
-            }
+            if(isVideo) { img.classList.add('hidden'); vid.classList.remove('hidden'); vid.src = p.video; vid.load(); vid.play().catch(e => console.log("Auto-play error")); } 
+            else { vid.classList.add('hidden'); vid.pause(); img.classList.remove('hidden'); img.src = p.video; }
         }
 
-        // ✨ VARIANT LOGIC
         const variantContainer = document.getElementById('modal-variants');
-        variantContainer.innerHTML = ''; // Clear prev options
+        variantContainer.innerHTML = '';
         if (p.variants && p.variants.length > 0) {
             variantContainer.classList.remove('hidden');
             const label = document.createElement('label');
             label.className = "text-[10px] font-bold text-gray-500 uppercase mb-2 block tracking-widest";
-            label.innerText = "CHOISIR VARIÉTÉ";
-            
+            label.innerText = "CHOISIR VARIÉTÉ"; // Or STRAIN if preferred, but VARIÉTÉ makes sense for packs too
+            if(p.id.includes('WZ')) label.innerText = "CHOISIR STRAIN";
             const select = document.createElement('select');
             select.id = 'variant-select';
             select.className = "w-full bg-[#1a1a1a] text-white text-xs p-3 rounded border border-[#222] focus:border-[#F59E0B] outline-none appearance-none font-bold uppercase";
-            
-            p.variants.forEach(v => {
-                const opt = document.createElement('option');
-                opt.value = v;
-                opt.innerText = v;
-                select.appendChild(opt);
-            });
-            
-            variantContainer.appendChild(label);
-            variantContainer.appendChild(select);
-        } else {
-            variantContainer.classList.add('hidden');
-        }
+            p.variants.forEach(v => { const opt = document.createElement('option'); opt.value = v; opt.innerText = v; select.appendChild(opt); });
+            variantContainer.appendChild(label); variantContainer.appendChild(select);
+        } else { variantContainer.classList.add('hidden'); }
 
         const list = document.getElementById('tiers-list');
         list.innerHTML = p.tiers.map(t => `
             <div onclick="addItem('${p.name}', '${t.w}', ${t.p})" class="flex justify-between items-center p-3 border border-[--border] bg-[#1a1a1a] active:bg-[--accent] active:text-black transition-colors cursor-pointer rounded-lg">
                 <span class="text-xs font-bold font-mono">${t.w}</span>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold">${t.p}${CONFIG.CURRENCY}</span>
-                    <span class="text-[9px] font-bold border border-current px-1.5 rounded opacity-60">+</span>
-                </div>
+                <div class="flex items-center gap-2"><span class="text-xs font-bold">${t.p}${CONFIG.CURRENCY}</span><span class="text-[9px] font-bold border border-current px-1.5 rounded opacity-60">+</span></div>
             </div>
         `).join('');
 
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        modal.classList.remove('hidden'); modal.classList.add('flex');
         setTimeout(() => content.classList.remove('translate-y-full'), 10);
     }
 
     function closeModal() {
         const modal = document.getElementById('product-modal');
         const content = document.getElementById('modal-content');
-        
-        // Stop Carousel
         clearInterval(carouselInterval);
-
         content.classList.add('translate-y-full');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.getElementById('modal-video').pause();
-        }, 300);
+        setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.getElementById('modal-video').pause(); }, 300);
     }
 
     function addItem(n, w, p) {
-        // ✨ CHECK FOR VARIANT SELECTION
         const select = document.getElementById('variant-select');
         let finalName = n;
-        if (select && document.getElementById('modal-variants').offsetParent !== null) {
-             finalName = `${n} [${select.value}]`;
-        }
+        if (select && document.getElementById('modal-variants').offsetParent !== null) { finalName = `${n} [${select.value}]`; }
 
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
         cart.push({name: finalName, weight: w, price: p});
+        
+        // Calculate total for upsell logic
+        const total = cart.reduce((a,b) => a+b.price, 0);
+        
         closeModal();
         updateDot();
+        
+        // Check triggers
+        checkUpsell(total);
     }
 
     function remItem(i) {
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
-        cart.splice(i, 1);
-        router('cart');
-        updateDot();
+        cart.splice(i, 1); router('cart'); updateDot();
     }
 
     function updateDot() {
@@ -1029,38 +1009,17 @@
     function setOpt(btn, group, val) {
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
         document.getElementById(`in-${group}`).value = val;
-        btn.parentElement.querySelectorAll('button').forEach(b => {
-            b.classList.remove('bg-[--accent]', 'text-black', 'border-transparent');
-            b.classList.add('bg-[#222]', 'text-gray-400', 'border-[--border]');
-        });
-        btn.classList.remove('bg-[#222]', 'text-gray-400', 'border-[--border]');
-        btn.classList.add('bg-[--accent]', 'text-black', 'border-transparent');
+        btn.parentElement.querySelectorAll('button').forEach(b => { b.classList.remove('bg-[--accent]', 'text-black', 'border-transparent'); b.classList.add('bg-[#222]', 'text-gray-400', 'border-[--border]'); });
+        btn.classList.remove('bg-[#222]', 'text-gray-400', 'border-[--border]'); btn.classList.add('bg-[--accent]', 'text-black', 'border-transparent');
 
-        // Logic Address & Time Labels
         if (group === 'srv') {
             const addrContainer = document.getElementById('address-container');
             const timeContainer = document.getElementById('time-container');
             const timeLabel = document.getElementById('time-label');
             const timeInput = document.getElementById('in-time');
-
-            if (val === 'MEET') {
-                addrContainer.style.display = 'none';
-                document.getElementById('in-addr').value = "MEET-UP POINT"; 
-                timeContainer.style.display = 'block';
-                timeLabel.innerText = "HEURE DE PASSAGE (10:30 - 02:00)";
-                timeInput.placeholder = "Ex: 14h30";
-            } else if (val === 'DELIV') {
-                addrContainer.style.display = 'block';
-                if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = "";
-                timeContainer.style.display = 'block';
-                timeLabel.innerText = "CRÉNEAU DE LIVRAISON SOUHAITÉ";
-                timeInput.placeholder = "Ex: Ce soir vers 21h";
-            } else { // POSTAL
-                addrContainer.style.display = 'block';
-                if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = "";
-                timeContainer.style.display = 'none';
-                timeInput.value = "N/A";
-            }
+            if (val === 'MEET') { addrContainer.style.display = 'none'; document.getElementById('in-addr').value = "MEET-UP POINT"; timeContainer.style.display = 'block'; timeLabel.innerText = "HEURE DE PASSAGE (10:30 - 02:00)"; timeInput.placeholder = "Ex: 14h30"; } 
+            else if (val === 'DELIV') { addrContainer.style.display = 'block'; if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = ""; timeContainer.style.display = 'block'; timeLabel.innerText = "CRÉNEAU DE LIVRAISON SOUHAITÉ"; timeInput.placeholder = "Ex: Ce soir vers 21h"; } 
+            else { addrContainer.style.display = 'block'; if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = ""; timeContainer.style.display = 'none'; timeInput.value = "N/A"; }
         }
     }
 
@@ -1072,21 +1031,11 @@
         const time = document.getElementById('in-time').value;
         const pay = document.getElementById('in-pay').value;
 
-        // Check for required fields based on service type
-        let requiredFields = [srv, name, wa, pay];
         let missingField = false;
+        if (!srv || !name || !wa || !pay) missingField = true;
+        else if ((srv === 'DELIV' || srv === 'POST') && !addr) missingField = true;
 
-        if (!srv) { missingField = true; }
-        else if (!name) { missingField = true; }
-        else if (!wa) { missingField = true; }
-        else if (!pay) { missingField = true; }
-        else if ((srv === 'DELIV' || srv === 'POST') && !addr) { missingField = true; }
-        // For MEET and DELIV, time is important, but often optional on a form, we allow empty.
-
-        if(missingField) { 
-            showUIMessage("Champs Manquants", "Veuillez s\u00e9lectionner le service, le paiement, le nom et le num\u00e9ro WhatsApp. L'adresse est \u00e9galement obligatoire pour la livraison et le postal.");
-            return; 
-        }
+        if(missingField) { showUIMessage("Champs Manquants", "Veuillez s\u00e9lectionner le service, le paiement, le nom et le num\u00e9ro WhatsApp. L'adresse est \u00e9galement obligatoire pour la livraison et le postal."); return; }
 
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
         
@@ -1102,82 +1051,34 @@
         
         cart = []; updateDot();
         router('success', code);
-        
-        // 🎉 MONEY SHOT CONFETTI
         showConfetti();
-        
         setTimeout(() => window.open(`https://wa.me/${CONFIG.ADMIN}?text=${encodeURIComponent(msg)}`, '_blank'), 1500);
     }
 
-    // --- UTILS ---
     function initPanic() {
         let lx, ly, lz, last = 0;
         window.addEventListener('devicemotion', e => {
             const {x,y,z} = e.accelerationIncludingGravity || {};
             if(!x) return;
             const delta = Math.abs(lx-x)+Math.abs(ly-y)+Math.abs(lz-z);
-            if(delta > 40 && Date.now() - last > 1000) {
-                document.getElementById('panic-screen').classList.remove('hidden');
-                localStorage.clear();
-                last = Date.now();
-            }
+            if(delta > 40 && Date.now() - last > 1000) { document.getElementById('panic-screen').classList.remove('hidden'); localStorage.clear(); last = Date.now(); }
             lx=x; ly=y; lz=z;
         });
     }
 
     function initSnow() {
         const c = document.getElementById('snow-container');
-        for(let i=0; i<30; i++) {
-            const f = document.createElement('div');
-            f.className = 'snowflake';
-            f.innerHTML = '•'; // Using a simple dot
-            f.style.left = Math.random()*100 + 'vw';
-            f.style.animationDuration = (Math.random()*3+2) + 's';
-            c.appendChild(f);
-        }
+        for(let i=0; i<30; i++) { const f = document.createElement('div'); f.className = 'snowflake'; f.innerHTML = '•'; f.style.left = Math.random()*100 + 'vw'; f.style.animationDuration = (Math.random()*3+2) + 's'; c.appendChild(f); }
     }
 
-    // 🎉 SIMPLE CONFETTI
     function showConfetti() {
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let pieces = [];
         const colors = ['#F59E0B', '#D97706', '#FFFFFF'];
-        
-        for(let i=0; i<100; i++) {
-            pieces.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height - canvas.height,
-                w: Math.random() * 5 + 2,
-                h: Math.random() * 10 + 5,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                speed: Math.random() * 5 + 2,
-                angle: Math.random() * 360,
-                spin: Math.random() * 10 - 5
-            });
-        }
-
-        function draw() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            let active = false;
-            pieces.forEach(p => {
-                p.y += p.speed;
-                p.angle += p.spin;
-                if(p.y < canvas.height) active = true;
-                
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.angle * Math.PI / 180);
-                ctx.fillStyle = p.color;
-                ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-                ctx.restore();
-            });
-            if(active) requestAnimationFrame(draw);
-            else ctx.clearRect(0,0,canvas.width,canvas.height);
-        }
+        for(let i=0; i<100; i++) { pieces.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height, w: Math.random() * 5 + 2, h: Math.random() * 10 + 5, color: colors[Math.floor(Math.random() * colors.length)], speed: Math.random() * 5 + 2, angle: Math.random() * 360, spin: Math.random() * 10 - 5 }); }
+        function draw() { ctx.clearRect(0,0,canvas.width,canvas.height); let active = false; pieces.forEach(p => { p.y += p.speed; p.angle += p.spin; if(p.y < canvas.height) active = true; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.angle * Math.PI / 180); ctx.fillStyle = p.color; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h); ctx.restore(); }); if(active) requestAnimationFrame(draw); else ctx.clearRect(0,0,canvas.width,canvas.height); }
         draw();
     }
 </script>

@@ -109,15 +109,30 @@
             align-items: center; justify-content: center;
         }
         .logo-container {
-            position: relative; width: 120px; height: 120px;
+            position: relative; width: 140px; height: 140px;
             display: flex; justify-content: center; align-items: center;
-            animation: logoFadeIn 1s ease-out forwards;
         }
-        .logo-img {
-            width: 100%; height: 100%; object-fit: contain;
-            filter: drop-shadow(0 0 0px transparent);
-            animation: goldenPulse 3s infinite ease-in-out;
+        /* ✨ LOGO ANIMATION SEQUENCE */
+        .logo-sequence {
+            position: absolute;
+            width: 100%; height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            animation: logoCycle 4s infinite ease-in-out;
         }
+        /* Animation Timing: 3 Logos */
+        .logo-sequence:nth-child(1) { animation-delay: 0s; }
+        .logo-sequence:nth-child(2) { animation-delay: 1.3s; }
+        .logo-sequence:nth-child(3) { animation-delay: 2.6s; }
+
+        @keyframes logoCycle {
+            0% { opacity: 0; transform: scale(0.9); }
+            10% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.4)); }
+            30% { opacity: 1; transform: scale(1); }
+            40% { opacity: 0; transform: scale(1.1); }
+            100% { opacity: 0; }
+        }
+
         .loading-line {
             width: 0; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -131,8 +146,6 @@
             animation: textFadeIn 1s ease-out forwards 1s;
         }
 
-        @keyframes logoFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        @keyframes goldenPulse { 0% { filter: drop-shadow(0 0 0px transparent); } 50% { filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.4)); } 100% { filter: drop-shadow(0 0 0px transparent); } }
         @keyframes lineExpand { 0% { width: 0; opacity: 0; } 50% { opacity: 1; } 100% { width: 150px; opacity: 0; } }
         @keyframes textFadeIn { to { opacity: 1; } }
 
@@ -171,8 +184,14 @@
 
 <!-- 💎 INTRO PRESTIGE -->
 <div id="intro-layer">
-    <div class="logo-container">
-        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" onerror="this.src='https://placehold.co/120x120/000/FFF?text=SV';" class="logo-img">
+    <div class="logo-container relative">
+        <!-- LOGO SEQUENCE: Replace URLs if needed -->
+        <!-- 1. South Valley -->
+        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" class="logo-sequence" alt="SV">
+        <!-- 2. Wizard Treez -->
+        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1766008859/IMG_2087_vgvu2p.png" class="logo-sequence" alt="WT">
+        <!-- 3. Third Logo (Placeholder - Add your 3rd link here) -->
+        <img src="https://placehold.co/200x200/000/FFF?text=CERTIFIED" class="logo-sequence" alt="Certified">
     </div>
     <div class="loading-line"></div>
     <p class="intro-text">Secure Access</p>
@@ -267,12 +286,11 @@
         </div>
     </div>
 
-    <!-- 🚀 UPSELL MODAL (LE PIÈGE À CASH) -->
+    <!-- 🚀 UPSELL MODAL -->
     <div id="upsell-modal" class="fixed inset-0 z-[80] bg-black/95 hidden flex items-center justify-center backdrop-blur-md p-4">
         <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-purple-500/50 w-full max-w-sm rounded-2xl p-1 relative overflow-hidden shadow-[0_0_50px_rgba(168,85,247,0.2)]">
             <div class="bg-[#050505] rounded-xl p-5 relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-600 blur-[60px] opacity-20"></div>
-                
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center gap-2">
                         <span class="text-lg animate-pulse">⚡</span>
@@ -280,7 +298,6 @@
                     </div>
                     <button onclick="closeUpsell()" class="text-gray-500 hover:text-white">✕</button>
                 </div>
-
                 <div class="flex gap-4 mb-4">
                     <div class="w-20 h-20 rounded-lg bg-black border border-purple-500/30 overflow-hidden shrink-0">
                         <video src="https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov" class="w-full h-full object-cover" autoplay loop muted></video>
@@ -294,11 +311,7 @@
                         </div>
                     </div>
                 </div>
-
-                <button onclick="addUpsell()" class="btn-upsell w-full py-3 text-xs tracking-widest flex items-center justify-center gap-2">
-                    <span>AJOUTER (+20€)</span>
-                    <span class="text-lg">🔥</span>
-                </button>
+                <button onclick="addUpsell()" class="btn-upsell w-full py-3 text-xs tracking-widest flex items-center justify-center gap-2"><span>AJOUTER (+20€)</span><span class="text-lg">🔥</span></button>
                 <button onclick="closeUpsell()" class="w-full py-2 text-[10px] text-gray-500 font-bold uppercase mt-2 hover:text-white transition-colors">Non merci, je refuse l'offre</button>
             </div>
         </div>
@@ -383,7 +396,7 @@
     let currentModalId = null;
     let carouselInterval = null;
     let bannerInterval = null;
-    let upsellShown = false; // Trigger control
+    let upsellShown = false;
 
     // --- UTILS UI ---
     function showUIMessage(title, body) {
@@ -410,7 +423,7 @@
         const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
         
         if (!isTWA && !isDev && !document.referrer) {
-            // Gatekeeper logic here
+            // Gatekeeper logic
         }
 
         console.log("✅ Gatekeeper: Acc\u00e8s autoris\u00e9.");
@@ -420,6 +433,7 @@
         setInterval(checkStatus, 60000); 
         setInterval(updateTicker, 60000); 
 
+        // INCREASED INTRO DURATION FOR LOGO CYCLE (4s)
         setTimeout(() => {
             document.getElementById('intro-layer').style.transition = 'opacity 0.8s ease';
             document.getElementById('intro-layer').style.opacity = '0';
@@ -429,7 +443,7 @@
                 router('menu');
                 initSnow();
             }, 800);
-        }, 3000);
+        }, 4000); // 4 seconds total for intro
 
         initPanic();
         if(window.Telegram?.WebApp) window.Telegram.WebApp.expand();
@@ -483,23 +497,30 @@
     const TIERS_WIZARD = [{w:'5G (1/2)',p:80},{w:'10G (1)',p:170}];
 
     const CATALOG = [
-        // 1. 🔥 OFFRES SPÉCIALES (VALUE LADDER L1 & L3)
+        // 1. 🔥 OFFRES SPÉCIALES
         {
-            id: 'TEST-PACK', name: "Tester Pack - Initiation", category: "🔥 OFFRES SPÉCIALES", icon: '🧪',
-            desc: "Le Kit d'Initiation. Vous doutez ? Testez.\n\nContient :\n- 2.5G Mousseux (Au Choix)\n- 2G Pink Kush USA TopShelf\n\n50€ pour comprendre pourquoi on est les Rois du 92.", tag: "BEST DEAL",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov", // Pink Kush video as placeholder
+            id: 'TEST-PACK', name: "Tester Pack - Signature", category: "🔥 OFFRES SPÉCIALES", icon: '💎',
+            desc: "✨ **L'EXPÉRIENCE SOUTH VALLEY**\n\nUne introduction privilégiée à nos standards de qualité.\n\n**Votre Coffret Découverte :**\n🍫 **2.5G** Mousseux Premium (Variété au choix)\n🧬 **2.0G** Pink Kush (Import Cali TopShelf)\n\n🤝 **Validé par le Cercle.**\nL'excellence à portée de main.", tag: "BEST DEAL",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov",
             tiers: [{w:'Pack Découverte', p:50}],
             variants: ["Mousseux Simpsons", "Mousseux Xale"]
         },
         {
-            id: 'SOUTH-BOX', name: "South Box 50G - Mix", category: "🔥 OFFRES SPÉCIALES", icon: '📦',
-            desc: "Le Stock Stratégique. 50G de pure Sunny Valley.\n\nMix Optimisé de nos meilleures références Sunny (Hors Wizard).\nParfait pour la rentabilité ou la consommation longue durée.\n\nChoisissez votre dominante :", tag: "BULK",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4", // Mousseux video as placeholder
-            tiers: [{w:'50G Box', p:280}],
-            variants: ["Dominante Pink Kush", "Dominante Mousseux", "Mix Équilibré 50/50"]
+            id: 'MID-PACK', name: "Mid-Pack - Daily Driver", category: "🔥 OFFRES SPÉCIALES", icon: '🚀',
+            desc: "⚖️ **L'ÉQUILIBRE PARFAIT**\n\nLe setup idéal pour tenir la distance sans sacrifier le plaisir.\n\n**Composition du Pack :**\n🍫 **20G** Mousseux Premium (Le fond de roulement)\n🇺🇸 **3.5G** Cali Pink Kush (La touche sucrée)\n\n💰 **Smart Choice :**\nFaites du stock sur le classique tout en profitant de la Top Shelf.", tag: "SMART CHOICE",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906313/IMG_1819_i4ipsf.mp4",
+            tiers: [{w:'Pack 23.5G', p:120}],
+            variants: ["Mousseux Simpsons", "Mousseux Xale"]
+        },
+        {
+            id: 'SOUTH-BOX', name: "South Box - Strategic Stock", category: "🔥 OFFRES SPÉCIALES", icon: '📦',
+            desc: "📦 **VOLUME & RENTABILITÉ MAXIMALE**\n\nLe pack ultime pour les connaisseurs qui voient grand.\n\n**Contenu du Bundle :**\n🧱 **50G** Mousseux Premium (Simpsons ou Xale)\n🇺🇸 **12G** Cali Pink Kush (Top Shelf Inclus)\n\n💎 **Total : 62G de produits certifiés.**\nUn prix au gramme imbattable pour cette qualité.", tag: "BULK",
+            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4",
+            tiers: [{w:'Bundle 62G', p:280}],
+            variants: ["Mousseux Simpsons", "Mousseux Xale"]
         },
 
-        // 2. SUNNY VALLEY (AVEC WIZARD TREEZ)
+        // 2. SUNNY VALLEY
         {
             id: 'WZ-ALL', name: "Olives Wizard Treez - Frozen Sift 🧊🧙‍♀️", category: _d('U3VubnkgVmFsbGV5'), icon: '🧙‍♀️',
             desc: "🇺🇸 CALI CONNECTION EXCLUSIVE 🇺🇸\n\nLE TERROIR WIZARD TREEZ DÉBARQUE !\n\n5 STRAINS LÉGENDAIRES RÉUNIES :\n🍌 Honey Banana\n👑 DREAM Queen\n🍇 Forbidden Fruits\n🍏 Apple GELATO\n🍩 OG DONUTZ\n\n🧊 FROZEN SIFT PREMIUM\n🌡️ COLD CURED STORAGE\n🍬 TERPS EXPLOSIFS\n\n⚠️ STOCK ULTRA LIMITÉ - PREMIER ARRIVÉ PREMIER SERVI !", tag: "WIZARD TREEZ",
@@ -576,7 +597,6 @@
 
     // --- VIEWS ---
     function renderMenu(c) {
-        // Banner Logic
         const bannerHtml = `
             <div id="home-banner" class="relative h-48 rounded-2xl overflow-hidden border border-[#222] shadow-2xl mb-6 fade-in cursor-pointer active:scale-[0.98] transition-all duration-300 group">
                 <div id="banner-track" class="absolute inset-0 flex h-full transition-transform duration-700 ease-in-out" style="width: 200%;">
@@ -617,7 +637,7 @@
         `;
 
         const cats = [
-            { name: "🔥 OFFRES SPÉCIALES", sub: "TESTER PACKS & BOX EN GROS", icon: "💎" },
+            { name: "🔥 OFFRES SPÉCIALES", sub: "PRIVILÈGES & BUNDLES", icon: "💎" },
             { name: _d('U3VubnkgVmFsbGV5'), sub: "CALI CONNECT • TOP SHELF • EXOTIC", icon: "☀️" },
             { name: _d('U25vdyBWYWxsZXk='), sub: "Festivité - Expérience givrée garantie", icon: "❄️" }
         ];
@@ -738,7 +758,7 @@
         let introText = "";
         if(category.includes("Sunny")) introText = "💎 SÉLECTION EXCLUSIVE CALIFORNIA. Direct from Farms. Terpènes validés, génétiques rares et connexions officielles. Le soleil en pochon.";
         else if(category.includes("Snow")) introText = "❄️ Menu Festif - Exclusivités givrées & pureté garantie ! Sélection premium & validée ! 🥳";
-        else if(category.includes("OFFRES")) introText = "🎁 LE COIN DES HUSTLERS. Packs découvertes et Offres en Gros. C'est ici que les vraies affaires se font. Stock limité.";
+        else if(category.includes("OFFRES")) introText = "💎 OFFRES PRIVILÈGES & BUNDLES. Optimisez votre investissement avec nos packs exclusifs. Qualité premium, tarification avantageuse.";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -835,6 +855,20 @@
                 </div>
                 <div class="titanium-card p-4">
                     <label class="text-[10px] font-bold text-gray-500 uppercase block mb-3">Paiement</label>
+                    
+                    <!-- CRYPTO SELECTOR -->
+                    <div id="crypto-selector" class="mb-3 hidden transition-all duration-300">
+                        <label class="text-[9px] font-bold text-gray-500 uppercase block mb-1">Devise Crypto</label>
+                        <select id="in-crypto-type" class="w-full bg-[#1a1a1a] text-white text-xs p-3 rounded border border-[#222] focus:border-[#F59E0B] outline-none appearance-none font-bold uppercase" onchange="updateCryptoAddress()">
+                            <option value="BTC">Bitcoin (BTC) - Recommended</option>
+                            <option value="LTC">Litecoin (LTC) - Fast & Cheap</option>
+                            <option value="USDT">USDT (TRC20/ERC20) - Stable</option>
+                        </select>
+                        <div id="crypto-address-display" class="mt-2 bg-black border border-dashed border-[#333] p-2 rounded text-[9px] text-gray-400 font-mono break-all text-center select-all">
+                            Selectionnez une devise...
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-2">
                         <button onclick="setOpt(this, 'pay', 'CASH')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CASH 💰</button>
                         <button onclick="setOpt(this, 'pay', 'CRYPTO')" class="bg-[#222] border border-[--border] text-gray-400 py-3 text-[9px] font-bold uppercase rounded hover:border-white transition-colors">CRYPTO ₿</button>
@@ -844,6 +878,20 @@
                 <button onclick="submitOrder()" class="btn-main w-full py-4 text-xs tracking-widest mt-4">ENVOYER L'ORDRE (${total}${CONFIG.CURRENCY})</button>
             </div>
         `;
+    }
+
+    function updateCryptoAddress() {
+        const type = document.getElementById('in-crypto-type').value;
+        const display = document.getElementById('crypto-address-display');
+        
+        // ⚠️ ADRESSES
+        const addresses = {
+            'BTC': 'bc1qsvuf7ynvdrv4t3grya36mkqqjkrre3adgp7555', 
+            'LTC': 'ltc1q6frmfj93g0vaxwfnhyfuvceqfnkph5hzzeunkk',
+            'USDT': '0x5e1f8c19a820e4e2e263265cbeac2098b15b7e44'
+        };
+        
+        display.innerText = addresses[type] || "Erreur";
     }
 
     function renderSuccess(c, code) {
@@ -949,7 +997,7 @@
             variantContainer.classList.remove('hidden');
             const label = document.createElement('label');
             label.className = "text-[10px] font-bold text-gray-500 uppercase mb-2 block tracking-widest";
-            label.innerText = "CHOISIR VARIÉTÉ"; // Or STRAIN if preferred, but VARIÉTÉ makes sense for packs too
+            label.innerText = "CHOISIR VARIÉTÉ";
             if(p.id.includes('WZ')) label.innerText = "CHOISIR STRAIN";
             const select = document.createElement('select');
             select.id = 'variant-select';
@@ -986,13 +1034,9 @@
         if(window.Telegram?.WebApp?.HapticFeedback) window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
         cart.push({name: finalName, weight: w, price: p});
         
-        // Calculate total for upsell logic
         const total = cart.reduce((a,b) => a+b.price, 0);
-        
         closeModal();
         updateDot();
-        
-        // Check triggers
         checkUpsell(total);
     }
 
@@ -1021,6 +1065,16 @@
             else if (val === 'DELIV') { addrContainer.style.display = 'block'; if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = ""; timeContainer.style.display = 'block'; timeLabel.innerText = "CRÉNEAU DE LIVRAISON SOUHAITÉ"; timeInput.placeholder = "Ex: Ce soir vers 21h"; } 
             else { addrContainer.style.display = 'block'; if(document.getElementById('in-addr').value === "MEET-UP POINT") document.getElementById('in-addr').value = ""; timeContainer.style.display = 'none'; timeInput.value = "N/A"; }
         }
+        
+        if (group === 'pay') {
+            const cryptoSelector = document.getElementById('crypto-selector');
+            if (val === 'CRYPTO') {
+                cryptoSelector.classList.remove('hidden');
+                updateCryptoAddress();
+            } else {
+                cryptoSelector.classList.add('hidden');
+            }
+        }
     }
 
     function submitOrder() {
@@ -1030,6 +1084,7 @@
         const addr = document.getElementById('in-addr').value;
         const time = document.getElementById('in-time').value;
         const pay = document.getElementById('in-pay').value;
+        const cryptoType = document.getElementById('in-crypto-type').value;
 
         let missingField = false;
         if (!srv || !name || !wa || !pay) missingField = true;
@@ -1046,8 +1101,13 @@
         let timeMsg = "";
         if (srv === 'MEET' && time) timeMsg = `\u23F0 Passage: ${time}`;
         if (srv === 'DELIV' && time) timeMsg = `\u23F0 Cr\u00e9neau: ${time}`;
+        
+        let payMsg = `💳 ${pay}`;
+        if (pay === 'CRYPTO') {
+            payMsg += ` (${cryptoType})`;
+        }
 
-        const msg = `🚨 *NOUVEL ORDRE ${code}* 🚨\n\n👤 ${name}\n📞 ${wa}\n\n📦\n${list}\n\n💵 ${total}${CONFIG.CURRENCY}\n📍 ${srv}\n🏠 ${addr}\n${timeMsg}\n💳 ${pay}`;
+        const msg = `🚨 *NOUVEL ORDRE ${code}* 🚨\n\n👤 ${name}\n📞 ${wa}\n\n📦\n${list}\n\n💵 ${total}${CONFIG.CURRENCY}\n📍 ${srv}\n🏠 ${addr}\n${timeMsg}\n${payMsg}`;
         
         cart = []; updateDot();
         router('success', code);
@@ -1083,4 +1143,4 @@
     }
 </script>
 </body>
-</html>
+</html

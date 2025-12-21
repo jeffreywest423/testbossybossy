@@ -185,13 +185,8 @@
 <!-- 💎 INTRO PRESTIGE -->
 <div id="intro-layer">
     <div class="logo-container relative">
-        <!-- LOGO SEQUENCE: Replace URLs if needed -->
-        <!-- 1. South Valley -->
-        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" class="logo-sequence" alt="SV">
-        <!-- 2. Wizard Treez -->
-        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1766008859/IMG_2087_vgvu2p.png" class="logo-sequence" alt="WT">
-        <!-- 3. Third Logo (Placeholder - Add your 3rd link here) -->
-        <img src="https://placehold.co/200x200/000/FFF?text=CERTIFIED" class="logo-sequence" alt="Certified">
+        <!-- LOGO MINIMALISTE -->
+        <img src="https://res.cloudinary.com/dlmmylat6/image/upload/v1765067656/Sans_titre_Logo_wjtljl.png" class="logo-img" alt="SV">
     </div>
     <div class="loading-line"></div>
     <p class="intro-text">Secure Access</p>
@@ -433,7 +428,7 @@
         setInterval(checkStatus, 60000); 
         setInterval(updateTicker, 60000); 
 
-        // INCREASED INTRO DURATION FOR LOGO CYCLE (4s)
+        // INTRO (Minimalist)
         setTimeout(() => {
             document.getElementById('intro-layer').style.transition = 'opacity 0.8s ease';
             document.getElementById('intro-layer').style.opacity = '0';
@@ -443,18 +438,18 @@
                 router('menu');
                 initSnow();
             }, 800);
-        }, 4000); // 4 seconds total for intro
+        }, 2000);
 
         initPanic();
         if(window.Telegram?.WebApp) window.Telegram.WebApp.expand();
     };
 
-    // --- TICKER ---
+    // --- TICKER (MARKETING VICIEUX) ---
     async function updateTicker() {
         const el = document.getElementById('live-ticker');
-        const msg1 = '<span class="ticker-item"><span class="ticker-icon">📦</span> ARRIVAGE PREMIUM EN COURS...</span>';
-        const msg2 = '<span class="ticker-item"><span class="ticker-icon">📫</span> -10% SUR LES ENVOIS POSTAL !</span>';
-        const msg3 = '<span class="ticker-item"><span class="ticker-icon">🎁</span> 1 AMI VALIDÉ = 1G OFFERT</span>';
+        const msg1 = '<span class="ticker-item"><span class="ticker-icon">🔒</span> CRYPTO PAIEMENT = 0 TRACE BANCAIRE</span>';
+        const msg2 = '<span class="ticker-item"><span class="ticker-icon">📉</span> GROS VOLUMES = PRIX DÉGRESSIFS AUTOMATIQUES</span>';
+        const msg3 = '<span class="ticker-item"><span class="ticker-icon">⚡</span> LIVRAISON 24/48H GARANTIE</span>';
         const comms = [msg1, msg2, msg3];
         
         let cryptoHtml = '';
@@ -497,30 +492,7 @@
     const TIERS_WIZARD = [{w:'5G (1/2)',p:80},{w:'10G (1)',p:170}];
 
     const CATALOG = [
-        // 1. 🔥 OFFRES SPÉCIALES
-        {
-            id: 'TEST-PACK', name: "Tester Pack - Signature", category: "🔥 OFFRES SPÉCIALES", icon: '💎',
-            desc: "✨ **L'EXPÉRIENCE SOUTH VALLEY**\n\nUne introduction privilégiée à nos standards de qualité.\n\n**Votre Coffret Découverte :**\n🍫 **2.5G** Mousseux Premium (Variété au choix)\n🧬 **2.0G** Pink Kush (Import Cali TopShelf)\n\n🤝 **Validé par le Cercle.**\nL'excellence à portée de main.", tag: "BEST DEAL",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906290/06AECEF5-7C0A-493C-9588-99433B454A4E_2_1_hnlzee.mov",
-            tiers: [{w:'Pack Découverte', p:50}],
-            variants: ["Mousseux Simpsons", "Mousseux Xale"]
-        },
-        {
-            id: 'MID-PACK', name: "Mid-Pack - Daily Driver", category: "🔥 OFFRES SPÉCIALES", icon: '🚀',
-            desc: "⚖️ **L'ÉQUILIBRE PARFAIT**\n\nLe setup idéal pour tenir la distance sans sacrifier le plaisir.\n\n**Composition du Pack :**\n🍫 **20G** Mousseux Premium (Le fond de roulement)\n🇺🇸 **3.5G** Cali Pink Kush (La touche sucrée)\n\n💰 **Smart Choice :**\nFaites du stock sur le classique tout en profitant de la Top Shelf.", tag: "SMART CHOICE",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906313/IMG_1819_i4ipsf.mp4",
-            tiers: [{w:'Pack 23.5G', p:120}],
-            variants: ["Mousseux Simpsons", "Mousseux Xale"]
-        },
-        {
-            id: 'SOUTH-BOX', name: "South Box - Strategic Stock", category: "🔥 OFFRES SPÉCIALES", icon: '📦',
-            desc: "📦 **VOLUME & RENTABILITÉ MAXIMALE**\n\nLe pack ultime pour les connaisseurs qui voient grand.\n\n**Contenu du Bundle :**\n🧱 **50G** Mousseux Premium (Simpsons ou Xale)\n🇺🇸 **12G** Cali Pink Kush (Top Shelf Inclus)\n\n💎 **Total : 62G de produits certifiés.**\nUn prix au gramme imbattable pour cette qualité.", tag: "BULK",
-            video: "https://res.cloudinary.com/dlmmylat6/video/upload/v1764906298/IMG_1715_rtit70.mp4",
-            tiers: [{w:'Bundle 62G', p:280}],
-            variants: ["Mousseux Simpsons", "Mousseux Xale"]
-        },
-
-        // 2. SUNNY VALLEY
+        // --- 2. SUNNY VALLEY
         {
             id: 'WZ-ALL', name: "Olives Wizard Treez - Frozen Sift 🧊🧙‍♀️", category: _d('U3VubnkgVmFsbGV5'), icon: '🧙‍♀️',
             desc: "🇺🇸 CALI CONNECTION EXCLUSIVE 🇺🇸\n\nLE TERROIR WIZARD TREEZ DÉBARQUE !\n\n5 STRAINS LÉGENDAIRES RÉUNIES :\n🍌 Honey Banana\n👑 DREAM Queen\n🍇 Forbidden Fruits\n🍏 Apple GELATO\n🍩 OG DONUTZ\n\n🧊 FROZEN SIFT PREMIUM\n🌡️ COLD CURED STORAGE\n🍬 TERPS EXPLOSIFS\n\n⚠️ STOCK ULTRA LIMITÉ - PREMIER ARRIVÉ PREMIER SERVI !", tag: "WIZARD TREEZ",
@@ -597,6 +569,7 @@
 
     // --- VIEWS ---
     function renderMenu(c) {
+        // Banner Logic
         const bannerHtml = `
             <div id="home-banner" class="relative h-48 rounded-2xl overflow-hidden border border-[#222] shadow-2xl mb-6 fade-in cursor-pointer active:scale-[0.98] transition-all duration-300 group">
                 <div id="banner-track" class="absolute inset-0 flex h-full transition-transform duration-700 ease-in-out" style="width: 200%;">
@@ -637,7 +610,6 @@
         `;
 
         const cats = [
-            { name: "🔥 OFFRES SPÉCIALES", sub: "PRIVILÈGES & BUNDLES", icon: "💎" },
             { name: _d('U3VubnkgVmFsbGV5'), sub: "CALI CONNECT • TOP SHELF • EXOTIC", icon: "☀️" },
             { name: _d('U25vdyBWYWxsZXk='), sub: "Festivité - Expérience givrée garantie", icon: "❄️" }
         ];
@@ -695,10 +667,10 @@
             
             <div class="grid grid-cols-2 gap-3 mb-6 fade-in">
                 <a href="https://t.me/+06onB0NQB345MGRk" class="titanium-card p-4 flex flex-col items-center justify-center text-center gap-2 border border-green-500/30 bg-green-500/5 active:scale-95 transition-transform">
-                    <span class="text-2xl">✅</span>
+                    <span class="text-2xl">💬</span>
                     <div>
-                        <p class="text-[10px] font-bold text-green-400 uppercase">Legit Check</p>
-                        <p class="text-[8px] text-gray-500">Voir les preuves & retours</p>
+                        <p class="text-[10px] font-bold text-green-400 uppercase">CHAT & AVIS CLIENTS</p>
+                        <p class="text-[8px] text-gray-500">Rejoindre la communauté (Vérif)</p>
                     </div>
                 </a>
                 <button onclick="document.getElementById('crypto-modal').classList.remove('hidden')" class="titanium-card p-4 flex flex-col items-center justify-center text-center gap-2 border border-blue-500/30 bg-blue-500/5 active:scale-95 transition-transform">
@@ -749,7 +721,17 @@
 
         const support = document.createElement('div');
         support.className = "titanium-card p-4 mt-6 fade-in border-l-4 border-l-blue-500 text-center";
-        support.innerHTML = `<h4 class="text-xs font-bold text-white uppercase mb-1">Besoin d'aide ?</h4><p class="text-[10px] text-gray-400 mb-3">Notre support est disponible pour vous assister.</p><a href="https://wa.me/${CONFIG.ADMIN}" class="text-[10px] bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded border border-blue-500/20 font-bold uppercase">Contacter le Support</a>`;
+        support.innerHTML = `
+            <h4 class="text-xs font-bold text-white uppercase mb-3">Besoin d'aide ?</h4>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="https://wa.me/${CONFIG.ADMIN}" class="bg-[#25D366] text-black px-3 py-2 rounded font-bold uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://t.me/SVF_staff" class="bg-[#0088cc] text-white px-3 py-2 rounded font-bold uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
+                    <span>Telegram</span>
+                </a>
+            </div>
+        `;
         c.appendChild(support);
     }
 
@@ -758,7 +740,6 @@
         let introText = "";
         if(category.includes("Sunny")) introText = "💎 SÉLECTION EXCLUSIVE CALIFORNIA. Direct from Farms. Terpènes validés, génétiques rares et connexions officielles. Le soleil en pochon.";
         else if(category.includes("Snow")) introText = "❄️ Menu Festif - Exclusivités givrées & pureté garantie ! Sélection premium & validée ! 🥳";
-        else if(category.includes("OFFRES")) introText = "💎 OFFRES PRIVILÈGES & BUNDLES. Optimisez votre investissement avec nos packs exclusifs. Qualité premium, tarification avantageuse.";
 
         c.innerHTML = `
             <div class="flex items-center gap-3 mb-4 fade-in">
@@ -1143,4 +1124,4 @@
     }
 </script>
 </body>
-</html
+</html>
